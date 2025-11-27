@@ -5,6 +5,8 @@ print(first_name + " " + last_name)
 x = 1
 y = x + 1
 print(y ** x)
+pi = 3.14
+print(pi)
 
 // This is a comment
 user_input = input("Enter a number: ")

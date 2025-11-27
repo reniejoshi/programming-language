@@ -29,10 +29,13 @@ def handle_assignment(user_input):
         name = user_input_array[0].strip()
         value = user_input_array[1].strip()
     
-        # If the value is a number, convert to integer
-        if value.isnumeric():
+        # If the value is an integer, convert to integer
+        if is_int(value):
             variables[name] = int(value)
-        # TODO: Add logic to convert to float
+
+        # If the value is a float, convert to float
+        elif is_float(value):
+            variables[name] = float(value)
     
         # If the value contains an arithmetic operatator, evaluate the expression from a string and store the result
         elif contains_arithmetic_operator(value):
@@ -40,6 +43,7 @@ def handle_assignment(user_input):
 
         # If user input calls input(), call input()
         elif value.startswith("input(") and value.endswith(")"):
+            # TODO: Apply same logic as handle_assignment() through seperate function
             # Extract the input prompt substring from the user input
             input_prompt = value[len("input("):-1].strip().strip("\"").strip("'")
             # Call input()
@@ -93,6 +97,20 @@ def is_string(value):
     if value.startswith("\"") and value.endswith("\"") or value.startswith("'") and value.endswith("'"):
         return True
     else:
+        return False
+
+def is_int(num):
+    try:
+        int(num)
+        return True
+    except ValueError:
+        return False
+
+def is_float(num):
+    try:
+        float(num)
+        return True
+    except ValueError:
         return False
 
 def evaluate(value):
