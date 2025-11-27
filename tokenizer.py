@@ -42,7 +42,11 @@ class Tokenizer:
                 i += 1
                 while i < len(code_string) and code_string[i].isnumeric():
                     i += 1
-                tokens.append(("NUMBER", code_string[start_index:i]))
+                number = code_string[start_index:i]
+                if Tokenizer.is_int(number):
+                    tokens.append(("INTEGER", number))
+                elif Tokenizer.is_float(number):
+                    tokens.append(("FLOAT", number))
                 continue
 
             # If char is variable assignment, append the assignment symbol to tokens
@@ -55,3 +59,17 @@ class Tokenizer:
             i += 1
             
         return tokens
+    
+    def is_int(num):
+        try:
+            int(num)
+            return True
+        except ValueError:
+            return False
+
+    def is_float(num):
+        try:
+            float(num)
+            return True
+        except ValueError:
+            return False
