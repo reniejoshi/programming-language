@@ -35,8 +35,8 @@ def handle_assignment(user_input):
         # TODO: Add logic to convert to float
     
         # If the value contains an arithmetic operatator, evaluate the expression from a string and store the result
-        elif "+" in value or "-" in value or "*" in value or "/" in value:
-            variables[name] = eval(value, {}, variables)
+        elif containsArithmeticOperator(value):
+            variables[name] = evaluate(value)
 
         # If user input calls input(), call input()
         elif value.startswith("input(") and value.endswith(")"):
@@ -63,6 +63,9 @@ def handle_print(user_input):
         # If the print_value is a number, print the print_value
         if print_value.isnumeric():
             print(print_value)
+        
+        elif containsArithmeticOperator(print_value):
+            print(evaluate(print_value))
 
         # If the print_value is a string, print the print_value
         elif print_value.startswith("\"") and print_value.endswith("\"") or print_value.startswith("'") and print_value.endswith("'"):
@@ -75,6 +78,15 @@ def handle_print(user_input):
         # If the variable to print is not in the variables dictionary, print error message
         else:
             print("Variable not declared:", print_value)
+
+def containsArithmeticOperator(value):
+    if "+" in value or "-" in value or "*" in value or "/" in value or "**" in value:
+        return True
+    else:
+        return False
+
+def evaluate(value):
+    return eval(value, {}, variables)
 
 filename = sys.argv[1]
 run_file(filename)
