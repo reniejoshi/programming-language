@@ -64,6 +64,10 @@ def handle_print(user_input):
         if value.isnumeric():
             print(value)
 
+        # If the value is a string, print the value
+        elif value.startswith("\"") and value.endswith("\"") or value.startswith("'") and value.endswith("'"):
+            print(value.strip("\"").strip("'"))
+
         # If the value is a variable in variables dictionary, print the value of the variable
         elif value in variables:
             print(variables[value])

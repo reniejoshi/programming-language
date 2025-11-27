@@ -5,3 +5,6 @@ print(y)
 // This is a comment
 user_input = input("Enter a number: ")
 print(user_input)
+
+print("Hello, world!")
+print('Hello, world again!')
