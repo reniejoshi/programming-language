@@ -4,7 +4,6 @@ import sys
 # Dictionary to store variables
 variables = {}
 
-# TODO: Add logic to handle comments
 # TODO: Develop unique syntax
 def run_file(filename):
     file = open(filename, "r")
@@ -13,8 +12,8 @@ def run_file(filename):
         # Remove whitespace
         line = line.strip()
 
-        # If line is empty, continue
-        if line == "":
+        # If line is empty or is a comment, continue
+        if line == "" or line.startswith("//"):
             continue
 
         # If variable assignment
