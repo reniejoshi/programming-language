@@ -2,5 +2,6 @@ x = 1
 y = x + 1
 print(y)
 
+// This is a comment
 user_input = input("Enter a number: ")
 print(user_input)
