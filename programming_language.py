@@ -1,7 +1,6 @@
 # Dictionary to store variables
 variables = {}
 
-# TODO: Refactor assignment and print logic into functions
 # TODO: Add comments to explain code
 # TODO: Rename variables for clarity
 # TODO: Add logic to read file
@@ -14,6 +13,16 @@ while True:
     
     # For variable assignment
     elif "=" in user_input:
+        handle_assignment(user_input)
+
+    # If the user input calls print(), call print()
+    elif "print(" in user_input:
+        handle_print(user_input)
+    
+    # Print the user input for debugging
+    print("user_input: " + user_input)
+
+def handle_assignment(user_input):
         user_input_array = user_input.split("=")
         name = user_input_array[0].strip()
         value = user_input_array[1].strip()
@@ -43,8 +52,7 @@ while True:
         # Print variables dictionary for debugging
         print("variables: ", variables)
 
-    # If the user input calls print(), call print()
-    elif "print(" in user_input:
+def handle_print(user_input):
         # Extract the value to print
         startIndex = user_input.find("(")
         endIndex = user_input.find(")")
@@ -61,6 +69,3 @@ while True:
         # If the variable to print is not in the variables dictionary, print error message
         else:
             print("Variable not declared:", value)
-    
-    # Print the user input for debugging
-    print("user_input: " + user_input)
