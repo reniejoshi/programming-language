@@ -1,26 +1,29 @@
+# Import module for system
+import sys
+
 # Dictionary to store variables
 variables = {}
 
-# TODO: Add comments to explain code
-# TODO: Rename variables for clarity
-# TODO: Add logic to read file
-while True:
-    user_input = input()
+# TODO: Add logic to handle comments
+# TODO: Develop unique syntax
+def run_file(filename):
+    file = open(filename, "r")
+    lines = file.readlines()
+    for line in lines:
+        # Remove whitespace
+        line = line.strip()
 
-    # To exit the while loop
-    if user_input == "exit":
-        break
-    
-    # For variable assignment
-    elif "=" in user_input:
-        handle_assignment(user_input)
+        # If line is empty, continue
+        if line == "":
+            continue
 
-    # If the user input calls print(), call print()
-    elif "print(" in user_input:
-        handle_print(user_input)
-    
-    # Print the user input for debugging
-    print("user_input: " + user_input)
+        # If variable assignment
+        elif "=" in line:
+            handle_assignment(line)
+
+        # If the line calls print(), call print()
+        elif "print(" in line:
+            handle_print(line)
 
 def handle_assignment(user_input):
         user_input_array = user_input.split("=")
@@ -69,3 +72,6 @@ def handle_print(user_input):
         # If the variable to print is not in the variables dictionary, print error message
         else:
             print("Variable not declared:", value)
+
+filename = sys.argv[1]
+run_file(filename)
