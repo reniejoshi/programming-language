@@ -58,23 +58,23 @@ def handle_print(user_input):
         # Extract the value to print
         startIndex = user_input.find("(")
         endIndex = user_input.find(")")
-        value = user_input[startIndex + 1:endIndex].strip()
+        print_value = user_input[startIndex + 1:endIndex].strip()
     
-        # If the value is a number, print the value
-        if value.isnumeric():
-            print(value)
+        # If the print_value is a number, print the print_value
+        if print_value.isnumeric():
+            print(print_value)
 
-        # If the value is a string, print the value
-        elif value.startswith("\"") and value.endswith("\"") or value.startswith("'") and value.endswith("'"):
-            print(value.strip("\"").strip("'"))
+        # If the print_value is a string, print the print_value
+        elif print_value.startswith("\"") and print_value.endswith("\"") or print_value.startswith("'") and print_value.endswith("'"):
+            print(print_value.strip("\"").strip("'"))
 
-        # If the value is a variable in variables dictionary, print the value of the variable
-        elif value in variables:
-            print(variables[value])
+        # If the print_value is a variable in variables dictionary, print the value of the variable
+        elif print_value in variables:
+            print(variables[print_value])
     
         # If the variable to print is not in the variables dictionary, print error message
         else:
-            print("Variable not declared:", value)
+            print("Variable not declared:", print_value)
 
 filename = sys.argv[1]
 run_file(filename)
