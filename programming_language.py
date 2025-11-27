@@ -35,7 +35,7 @@ def handle_assignment(user_input):
         # TODO: Add logic to convert to float
     
         # If the value contains an arithmetic operatator, evaluate the expression from a string and store the result
-        elif containsArithmeticOperator(value):
+        elif contains_arithmetic_operator(value):
             variables[name] = evaluate(value)
 
         # If user input calls input(), call input()
@@ -51,6 +51,10 @@ def handle_assignment(user_input):
             else:
                 variables[name] = user_input
 
+        # If the value is a string, assign the string
+        elif is_string(value):
+            variables[name] = value.strip("\"").strip("'")
+
         # Print variables dictionary for debugging
         print("variables: ", variables)
 
@@ -58,29 +62,35 @@ def handle_print(user_input):
         # Extract the value to print
         startIndex = user_input.find("(")
         endIndex = user_input.find(")")
-        print_value = user_input[startIndex + 1:endIndex].strip()
+        value = user_input[startIndex + 1:endIndex].strip()
     
-        # If the print_value is a number, print the print_value
-        if print_value.isnumeric():
-            print(print_value)
+        # If the value is a number, print the value
+        if value.isnumeric():
+            print(value)
         
-        elif containsArithmeticOperator(print_value):
-            print(evaluate(print_value))
+        elif contains_arithmetic_operator(value):
+            print(evaluate(value))
 
-        # If the print_value is a string, print the print_value
-        elif print_value.startswith("\"") and print_value.endswith("\"") or print_value.startswith("'") and print_value.endswith("'"):
-            print(print_value.strip("\"").strip("'"))
+        # If the value is a string, print the string
+        elif is_string(value):
+            print(value.strip("\"").strip("'"))
 
-        # If the print_value is a variable in variables dictionary, print the value of the variable
-        elif print_value in variables:
-            print(variables[print_value])
+        # If the value is a variable in variables dictionary, print the value of the variable
+        elif value in variables:
+            print(variables[value])
     
         # If the variable to print is not in the variables dictionary, print error message
         else:
-            print("Variable not declared:", print_value)
+            print("Variable not declared:", value)
 
-def containsArithmeticOperator(value):
+def contains_arithmetic_operator(value):
     if "+" in value or "-" in value or "*" in value or "/" in value or "**" in value:
+        return True
+    else:
+        return False
+
+def is_string(value):
+    if value.startswith("\"") and value.endswith("\"") or value.startswith("'") and value.endswith("'"):
         return True
     else:
         return False
