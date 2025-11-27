@@ -8,6 +8,8 @@ variables = {}
 def run_file(filename):
     file = open(filename, "r")
     lines = file.readlines()
+    if_statement_lines = []
+
     for line in lines:
         # Remove whitespace
         line = line.strip()
@@ -15,6 +17,13 @@ def run_file(filename):
         # If line is empty or is a comment, continue
         if line == "" or line.startswith("//"):
             continue
+
+        # If line is the start of if statement
+        elif line.startswith("if") and line.endswith("{"):
+            condition = line[len("if"):-1].strip()
+            if evaluate(condition):
+                while not line.endswith("}"):
+                    if_statement_lines.append(line)
 
         # If variable assignment
         elif "=" in line:
