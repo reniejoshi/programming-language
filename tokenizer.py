@@ -54,6 +54,24 @@ class Tokenizer:
                 tokens.append(("ASSIGNMENT", code_string[i]))
                 i += 1
                 continue
+            
+            # If char is open brace, append open brace to tokens
+            elif char == "{":
+                tokens.append(("OPEN_BRACE", code_string[i]))
+                i += 1
+                continue
+            
+            # If char is close brace, append close brace to tokens
+            elif char == "}":
+                tokens.append(("CLOSE_BRACE", code_string[i]))
+                i += 1
+                continue
+
+            # If char is newline, append new line to tokens
+            elif char == "\n":
+                tokens.append(("NEWLINE", code_string[i]))
+                i += 1
+                continue
 
             # Increment i
             i += 1
