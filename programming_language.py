@@ -1,5 +1,7 @@
 # Import module for system
 import sys
+# Import Tokenizer class from tokenizer.py
+from tokenizer import Tokenizer
 
 # Dictionary to store variables
 variables = {}
@@ -125,5 +127,12 @@ def is_float(num):
 def evaluate(value):
     return eval(value, {}, variables)
 
+def test_tokenizer(filename):
+    file = open(filename, "r")
+    code_string = file.read()
+    tokens = Tokenizer.tokenize(code_string)
+    print(tokens)
+
 filename = sys.argv[1]
-run_file(filename)
+test_tokenizer(filename)
+#run_file(filename)
