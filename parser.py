@@ -57,12 +57,12 @@ class Parser:
     def __init__(self, tokens):
         self.tokens = tokens
         # Index in tokens
-        self.i = 0
+        self.index = 0
     
     # Method that returns the current token
     def current(self):
-        if self.i < len(self.tokens):
-            return self.tokens[self.i]
+        if self.index < len(self.tokens):
+            return self.tokens[self.index]
         else:
             return ("EOF", "")
 
@@ -70,4 +70,4 @@ class Parser:
         # Loop to iterate through tokens
         while self.current()[0] != "EOF":
             pass
-            self.i += 1
+            self.index += 1
