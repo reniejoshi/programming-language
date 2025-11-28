@@ -82,14 +82,15 @@ class Parser:
 
         # Loop to iterate through tokens
         while self.current()[0] != "EOF":
-            if self.current()[0] == "INTEGER":
-                statements.append(self.parse_integer(self.current()[1]))
-            elif self.current()[0] == "FLOAT":
-                statements.append(self.parse_float(self.current()[1]))
-            elif self.current()[0] == "STRING":
-                statements.append(self.parse_string(self.current()[1]))
-            elif self.current()[0] == "IDENTIFIER" and self.next_index()[0] == "ASSIGNMENT":
-                statements.append(self.parse_assignment_statement())
+            match self.current()[0]:
+                case "INTEGER":
+                    statements.append(self.parse_integer(self.current()[1]))
+                case "FLOAT":
+                    statements.append(self.parse_float(self.current()[1]))
+                case "STRING":
+                    statements.append(self.parse_string(self.current()[1]))
+                case "IDENTIFIER" if self.next_index()[0] == "ASSIGNMENT":
+                    statements.append(self.parse_assignment_statement())
 
             self.index += 1
         
