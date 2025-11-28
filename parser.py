@@ -56,12 +56,18 @@ class ArithmeticOperation:
 class Parser:
     def __init__(self, tokens):
         self.tokens = tokens
-    
-    def parse(self):
         # Index in tokens
         self.i = 0
+    
+    # Method that returns the current token
+    def current(self):
+        if self.i < len(self.tokens):
+            return self.tokens[self.i]
+        else:
+            return ("EOF", "")
 
+    def parse(self):
         # Loop to iterate through tokens
-        while self.i < len(self.tokens):
+        while self.current()[0] != "EOF":
             pass
             self.i += 1
