@@ -65,6 +65,16 @@ class Parser:
             return self.tokens[self.index]
         else:
             return ("EOF", "")
+    
+    def next_index(self):
+        if self.index + 1 < len(self.tokens):
+            return self.tokens[self.index + 1]
+        else:
+            return ("EOF", "")
+    
+    def consume(self, token_type):
+        if self.current()[0] == token_type:
+            self.index += 1
 
     def parse(self):
         # Loop to iterate through tokens
@@ -75,8 +85,9 @@ class Parser:
                 self.parse_float(self.current()[1])
             elif self.current()[0] == "STRING":
                 self.parse_string(self.current()[1])
+            elif self.current()[0] == "IDENTIFIER" and self.next_index()[0] == "ASSIGNMENT":
+                self.parse_assignment_statement()
 
-            pass
             self.index += 1
     
     def parse_integer(self, integer):
@@ -90,3 +101,10 @@ class Parser:
     
     def parse_print_statement(self, expression):
         return PrintStatement(expression)
+    
+    def parse_assignment_statement(self):
+        name = Identifier(self.current()[1])
+        self.consume("IDENTIFIER")
+        self.consume("ASSIGNMENT")
+        expression = self.current()[1]
+        return AssignmentStatement(name, expression)
