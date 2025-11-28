@@ -130,8 +130,10 @@ def evaluate(value):
 def test_tokenizer(filename):
     file = open(filename, "r")
     code_string = file.read()
-    tokens = Tokenizer.tokenize(code_string)
-    print(tokens)
+    tokenizer = Tokenizer(code_string)
+    tokens = tokenizer.tokenize()
+    for token in tokens:
+        print(token)
 
 filename = sys.argv[1]
 test_tokenizer(filename)
