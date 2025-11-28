@@ -2,6 +2,7 @@
 import sys
 # Import Tokenizer class from tokenizer.py
 from tokenizer import Tokenizer
+from parser import Parser
 
 # Dictionary to store variables
 variables = {}
@@ -132,9 +133,23 @@ def test_tokenizer(filename):
     code_string = file.read()
     tokenizer = Tokenizer(code_string)
     tokens = tokenizer.tokenize()
+
+    print("tokens:")
     for token in tokens:
         print(token)
+    
+    return tokens
+
+def test_parser(tokens):
+    parser = Parser(tokens)
+    ast = parser.parse()
+
+    print("\nAbstract Syntax Tree nodes:")
+    for node in ast:
+        print(node)
 
 filename = sys.argv[1]
-test_tokenizer(filename)
+tokens = test_tokenizer(filename)
+test_parser(tokens)
+
 #run_file(filename)
