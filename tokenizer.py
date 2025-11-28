@@ -47,8 +47,8 @@ class Tokenizer:
 
             # If char is start of a string, append the string to tokens
             elif char == "\"" or char == "'":
-                start_index = self.i
                 self.i += 1
+                start_index = self.i
                 while self.i < len(code_string) and code_string[self.i] != "\"" and code_string[self.i] != "'":
                     self.i += 1
                 self.tokens.append(("STRING", code_string[start_index:self.i]))
