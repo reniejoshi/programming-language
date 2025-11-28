@@ -8,8 +8,12 @@ class Tokenizer:
         code_string = self.code_string
         # List of tuples holding type and value
         self.tokens = []
-        # List of keywords
-        keywords = ["output", "input", "if"]
+        # Dictionary of keywords
+        keywords = {
+            "output": "PRINT",
+            "input": "INPUT",
+            "if": "IF"
+        }
         # List of arithmetic operators
         arithmetic_operators = ["+", "-", "*", "/", "^"]
         # List of comparision operators
@@ -34,7 +38,8 @@ class Tokenizer:
                 while self.i < len(code_string) and code_string[self.i].isalpha():
                     self.i += 1
                 if code_string[start_index:self.i] in keywords:
-                    self.tokens.append(("KEYWORD", code_string[start_index:self.i]))
+                    token_type = code_string[start_index:self.i]
+                    self.tokens.append((keywords[token_type], code_string[start_index:self.i]))
                 else:
                     self.tokens.append(("IDENTIFIER", code_string[start_index:self.i]))
                 continue
