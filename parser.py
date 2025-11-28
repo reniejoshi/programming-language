@@ -69,6 +69,13 @@ class Parser:
     def parse(self):
         # Loop to iterate through tokens
         while self.current()[0] != "EOF":
+            if self.current()[0] == "INTEGER":
+                self.parse_integer(self.current()[1])
+            elif self.current()[0] == "FLOAT":
+                self.parse_float(self.current()[1])
+            elif self.current()[0] == "STRING":
+                self.parse_string(self.current()[1])
+
             pass
             self.index += 1
     
