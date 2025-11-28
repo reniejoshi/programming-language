@@ -68,11 +68,13 @@ class Tokenizer:
                 self.i += 1
                 continue
 
+            # If char is an arithmetic operator, append the arithmetic operator to tokens
             elif char in arithmetic_operators:
                 self.tokens.append(("ARITHMETIC_OPERATOR", code_string[self.i]))
                 self.i += 1
                 continue
 
+            # If char is the start of a comparision operator, append the comparision operator to tokens
             elif char + code_string[self.i] in comparision_operators:
                 self.tokens.append(("COMPARISION_OPERATOR", char + code_string[self.i]))
                 self.i += 2
