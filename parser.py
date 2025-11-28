@@ -77,18 +77,23 @@ class Parser:
             self.index += 1
 
     def parse(self):
+        # List to store parsed AST nodes
+        statements = []
+
         # Loop to iterate through tokens
         while self.current()[0] != "EOF":
             if self.current()[0] == "INTEGER":
-                self.parse_integer(self.current()[1])
+                statements.append(self.parse_integer(self.current()[1]))
             elif self.current()[0] == "FLOAT":
-                self.parse_float(self.current()[1])
+                statements.append(self.parse_float(self.current()[1]))
             elif self.current()[0] == "STRING":
-                self.parse_string(self.current()[1])
+                statements.append(self.parse_string(self.current()[1]))
             elif self.current()[0] == "IDENTIFIER" and self.next_index()[0] == "ASSIGNMENT":
-                self.parse_assignment_statement()
+                statements.append(self.parse_assignment_statement())
 
             self.index += 1
+        
+        return statements
     
     def parse_integer(self, integer):
         return Integer(integer)
