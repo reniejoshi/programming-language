@@ -71,3 +71,15 @@ class Parser:
         while self.current()[0] != "EOF":
             pass
             self.index += 1
+    
+    def parse_integer(self, integer):
+        return Integer(integer)
+    
+    def parse_float(self, float):
+        return Float(float)
+    
+    def parse_string(self, string):
+        return String(string)
+    
+    def parse_print_statement(self, expression):
+        return PrintStatement(expression)
