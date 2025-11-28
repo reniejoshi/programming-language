@@ -91,6 +91,8 @@ class Parser:
                     statements.append(self.parse_string(self.current()[1]))
                 case "IDENTIFIER" if self.next_index()[0] == "ASSIGNMENT":
                     statements.append(self.parse_assignment_statement())
+                case "PRINT":
+                    statements.append(self.parse_print_statement())
 
             self.index += 1
         
@@ -105,7 +107,9 @@ class Parser:
     def parse_string(self, string):
         return String(string)
     
-    def parse_print_statement(self, expression):
+    def parse_print_statement(self):
+        self.consume("PRINT")
+        expression = self.current()[1]
         return PrintStatement(expression)
     
     def parse_assignment_statement(self):
