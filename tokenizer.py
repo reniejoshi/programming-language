@@ -1,16 +1,7 @@
 # This class translates code into tokens for the parser
 class Tokenizer:
     # TODO: Add tokenizing logic for the following types:
-    # IDENTIFIER
-    # INTEGER
-    # FLOAT
-    # STRING
-    # KEYWORD
     # OPERATOR (arithmetic and comparision)
-    # ASSIGNMENT
-    # OPEN_BRACE
-    # CLOSE_BRACE
-    # NEWLINE
     # KEYWORD e.g. print, input, if
     def tokenize(code_string):
         # List of tuples holding type and value
