@@ -5,13 +5,15 @@ class Tokenizer:
         self.code_string = code_string
 
     # TODO: Add tokenizing logic for the following types:
-    # OPERATOR (arithmetic and comparision)
+    # OPERATOR (comparision)
     def tokenize(self):
         code_string = self.code_string
         # List of tuples holding type and value
         self.tokens = []
         # List of keywords
         keywords = ["print", "input", "if"]
+        # List of operators (arithmetic)
+        operators = ["+", "-", "*", "/", "^"]
         # Index in code_string
         self.i = 0
 
@@ -62,6 +64,11 @@ class Tokenizer:
             # If char is variable assignment, append the assignment symbol to tokens
             elif char == "=":
                 self.tokens.append(("ASSIGNMENT", code_string[self.i]))
+                self.i += 1
+                continue
+
+            elif char in operators:
+                self.tokens.append(("OPERATOR", code_string[self.i]))
                 self.i += 1
                 continue
             
