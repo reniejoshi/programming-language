@@ -1,82 +1,87 @@
 # This class translates code into tokens for the parser
 class Tokenizer:
+    # Method to initialize object of class
+    def __init__(self, code_string):
+        self.code_string = code_string
+
     # TODO: Add tokenizing logic for the following types:
     # OPERATOR (arithmetic and comparision)
     # KEYWORD e.g. print, input, if
-    def tokenize(code_string):
+    def tokenize(self):
+        code_string = self.code_string
         # List of tuples holding type and value
-        tokens = []
+        self.tokens = []
         # Index in code_string
-        i = 0
+        self.i = 0
 
         # Loop to iterate through code_string
-        while i < len(code_string):
-            char = code_string[i]
+        while self.i < len(code_string):
+            char = code_string[self.i]
 
             # If char is space, continue
             if char.isspace():
-                i += 1
+                self.i += 1
                 continue
 
             # If char is the start of an identifier in camel case, append the identifer to tokens
             elif char.isalpha():
-                start_index = i
-                i += 1
-                while i < len(code_string) and code_string[i].isalpha():
-                    i += 1
-                tokens.append(("IDENTIFIER", code_string[start_index:i]))
+                start_index = self.i
+                self.i += 1
+                while self.i < len(code_string) and code_string[self.i].isalpha():
+                    self.i += 1
+                self.tokens.append(("IDENTIFIER", code_string[start_index:self.i]))
                 continue
             
             # If char is a number, append the number to tokens
             elif char.isnumeric():
-                start_index = i
-                i += 1
-                while i < len(code_string) and code_string[i].isnumeric():
-                    i += 1
-                number = code_string[start_index:i]
+                start_index = self.i
+                self.i += 1
+                while self.i < len(code_string) and code_string[self.i].isnumeric():
+                    self.i += 1
+                number = code_string[start_index:self.i]
                 if Tokenizer.is_int(number):
-                    tokens.append(("INTEGER", number))
+                    self.tokens.append(("INTEGER", number))
                 elif Tokenizer.is_float(number):
-                    tokens.append(("FLOAT", number))
+                    self.tokens.append(("FLOAT", number))
                 continue
 
             # If char is start of a string, append the string to tokens
             elif char == "\"" or char == "'":
-                start_index = i
-                i += 1
-                while i != "\"" and i != "'":
-                    i += 1
-                tokens.append(("STRING", code_string[start_index:i]))
+                start_index = self.i
+                self.i += 1
+                while self.i < len(code_string) and code_string[self.i] != "\"" and code_string[self.i] != "'":
+                    self.i += 1
+                self.tokens.append(("STRING", code_string[start_index:self.i]))
                 continue
 
             # If char is variable assignment, append the assignment symbol to tokens
             elif char == "=":
-                tokens.append(("ASSIGNMENT", code_string[i]))
-                i += 1
+                self.tokens.append(("ASSIGNMENT", code_string[self.i]))
+                self.i += 1
                 continue
             
             # If char is open brace, append open brace to tokens
             elif char == "{":
-                tokens.append(("OPEN_BRACE", code_string[i]))
-                i += 1
+                self.tokens.append(("OPEN_BRACE", code_string[self.i]))
+                self.i += 1
                 continue
             
             # If char is close brace, append close brace to tokens
             elif char == "}":
-                tokens.append(("CLOSE_BRACE", code_string[i]))
-                i += 1
+                self.tokens.append(("CLOSE_BRACE", code_string[self.i]))
+                self.i += 1
                 continue
 
             # If char is newline, append new line to tokens
             elif char == "\n":
-                tokens.append(("NEWLINE", code_string[i]))
-                i += 1
+                self.tokens.append(("NEWLINE", code_string[self.i]))
+                self.i += 1
                 continue
 
             # Increment i
-            i += 1
+            self.i += 1
             
-        return tokens
+        return self.tokens
     
     def is_int(num):
         try:
