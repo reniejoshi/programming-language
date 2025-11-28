@@ -4,16 +4,17 @@ class Tokenizer:
     def __init__(self, code_string):
         self.code_string = code_string
 
-    # TODO: Add tokenizing logic for the following types:
-    # OPERATOR (comparision)
     def tokenize(self):
         code_string = self.code_string
         # List of tuples holding type and value
         self.tokens = []
         # List of keywords
         keywords = ["print", "input", "if"]
-        # List of operators (arithmetic)
-        operators = ["+", "-", "*", "/", "^"]
+        # List of arithmetic operators
+        arithmetic_operators = ["+", "-", "*", "/", "^"]
+        # List of comparision operators
+        comparision_operators = ["==", "!=", ">", "<", ">=", "<="]
+
         # Index in code_string
         self.i = 0
 
@@ -62,16 +63,21 @@ class Tokenizer:
                 continue
 
             # If char is variable assignment, append the assignment symbol to tokens
-            elif char == "=":
+            elif char == "=" and code_string[self.i + 1] != "=":
                 self.tokens.append(("ASSIGNMENT", code_string[self.i]))
                 self.i += 1
                 continue
 
-            elif char in operators:
-                self.tokens.append(("OPERATOR", code_string[self.i]))
+            elif char in arithmetic_operators:
+                self.tokens.append(("ARITHMETIC_OPERATOR", code_string[self.i]))
                 self.i += 1
                 continue
-            
+
+            elif char + code_string[self.i] in comparision_operators:
+                self.tokens.append(("COMPARISION_OPERATOR", char + code_string[self.i]))
+                self.i += 2
+                continue
+
             # If char is open brace, append open brace to tokens
             elif char == "{":
                 self.tokens.append(("OPEN_BRACE", code_string[self.i]))
