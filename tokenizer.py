@@ -9,7 +9,7 @@ class Tokenizer:
         # List of tuples holding type and value
         self.tokens = []
         # List of keywords
-        keywords = ["print", "input", "if"]
+        keywords = ["output", "input", "if"]
         # List of arithmetic operators
         arithmetic_operators = ["+", "-", "*", "/", "^"]
         # List of comparision operators

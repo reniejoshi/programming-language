@@ -2,7 +2,7 @@ x = 1
 y = 1.5
 string = "Hello, world"
 
-print(x)
-print(y)
-print(x == y)
-print(string)
+output(x)
+output(y)
+output(x == y)
+output(string)
