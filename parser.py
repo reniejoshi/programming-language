@@ -1,5 +1,26 @@
 # Abstract Syntax Tree node types
 
+class Integer:
+    def __init__(self, integer):
+        self.integer = integer
+    
+    def __repr__(self):
+        return f"Integer(integer={self.integer})"
+
+class Float:
+    def __init__(self, float):
+        self.float = float
+    
+    def __repr__(self):
+        return f"Float(float={self.float})"
+
+class String:
+    def __init__(self, string):
+        self.string = string
+    
+    def __repr__(self):
+        return f"String(string={self.string})"
+
 class PrintStatement:
     def __init__(self, expression):
         self.expression = expression
