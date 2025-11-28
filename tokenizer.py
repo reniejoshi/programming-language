@@ -36,7 +36,7 @@ class Tokenizer:
             elif char.isnumeric():
                 start_index = self.i
                 self.i += 1
-                while self.i < len(code_string) and code_string[self.i].isnumeric():
+                while self.i < len(code_string) and (code_string[self.i].isnumeric() or code_string[self.i] == "."):
                     self.i += 1
                 number = code_string[start_index:self.i]
                 if Tokenizer.is_int(number):
