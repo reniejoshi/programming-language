@@ -38,9 +38,9 @@ class Parser:
     
     def parse(self):
         # Index in tokens
-        i = 0
+        self.i = 0
 
         # Loop to iterate through tokens
-        while i < len(self.tokens):
+        while self.i < len(self.tokens):
             pass
-            i += 1
+            self.i += 1
