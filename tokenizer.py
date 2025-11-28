@@ -6,11 +6,12 @@ class Tokenizer:
 
     # TODO: Add tokenizing logic for the following types:
     # OPERATOR (arithmetic and comparision)
-    # KEYWORD e.g. print, input, if
     def tokenize(self):
         code_string = self.code_string
         # List of tuples holding type and value
         self.tokens = []
+        # List of keywords
+        keywords = ["print", "input", "if"]
         # Index in code_string
         self.i = 0
 
@@ -23,13 +24,16 @@ class Tokenizer:
                 self.i += 1
                 continue
 
-            # If char is the start of an identifier in camel case, append the identifer to tokens
+            # If char is the start of an identifier in camel case or keyword, append the identifer or keyword to tokens
             elif char.isalpha():
                 start_index = self.i
                 self.i += 1
                 while self.i < len(code_string) and code_string[self.i].isalpha():
                     self.i += 1
-                self.tokens.append(("IDENTIFIER", code_string[start_index:self.i]))
+                if code_string[start_index:self.i] in keywords:
+                    self.tokens.append(("KEYWORD", code_string[start_index:self.i]))
+                else:
+                    self.tokens.append(("IDENTIFIER", code_string[start_index:self.i]))
                 continue
             
             # If char is a number, append the number to tokens
@@ -52,6 +56,7 @@ class Tokenizer:
                 while self.i < len(code_string) and code_string[self.i] != "\"" and code_string[self.i] != "'":
                     self.i += 1
                 self.tokens.append(("STRING", code_string[start_index:self.i]))
+                self.i += 1
                 continue
 
             # If char is variable assignment, append the assignment symbol to tokens
