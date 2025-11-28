@@ -49,6 +49,15 @@ class Tokenizer:
                     tokens.append(("FLOAT", number))
                 continue
 
+            # If char is start of a string, append the string to tokens
+            elif char == "\"" or char == "'":
+                start_index = i
+                i += 1
+                while i != "\"" and i != "'":
+                    i += 1
+                tokens.append(("STRING", code_string[start_index:i]))
+                continue
+
             # If char is variable assignment, append the assignment symbol to tokens
             elif char == "=":
                 tokens.append(("ASSIGNMENT", code_string[i]))
