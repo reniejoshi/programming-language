@@ -78,5 +78,10 @@ def run_file():
     interpreter = Interpreter()
     for statement in ast:
         interpreter.evaluate(statement)
+    
+    variables = interpreter.variables.variables
+    print("\nvariables: ")
+    for name in variables:
+        print(f"Name: {name}, Value: {variables[name]}")
 
 run_file()
