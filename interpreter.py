@@ -1,3 +1,7 @@
+import sys
+from tokenizer import Tokenizer
+from parser import Parser
+
 class Variables:
     def __init__(self):
         # Dictionary to store variables
@@ -12,3 +16,23 @@ class Variables:
 class Interpreter:
     def __init__(self):
         self.variables = Variables()
+
+def run_file():
+    filename = sys.argv[1]
+    file = open(filename, "r")
+    code_string = file.read()
+    tokenizer = Tokenizer(code_string)
+    tokens = tokenizer.tokenize()
+
+    print("tokens:")
+    for token in tokens:
+        print(token)
+
+    parser = Parser(tokens)
+    ast = parser.parse()
+
+    print("\nAbstract Syntax Tree nodes:")
+    for node in ast:
+        print(node)
+
+run_file()
