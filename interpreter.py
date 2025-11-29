@@ -25,6 +25,22 @@ class Interpreter:
             return self.variables.get_variable(node.name)
         
         elif isinstance(node, ArithmeticOperation):
+            return self.handle_arithmetic_operation(node)
+
+        elif isinstance(node, AssignmentStatement):
+            return self.handle_assignment_statement(node)
+
+        elif isinstance(node, PrintStatement):
+            return print(node.expression)
+    
+    def handle_assignment_statement(self, node):
+        if isinstance(node.expression, Term):
+            self.variables.set_variable(node.identifier, node.expression.value)
+        elif isinstance(node.expression, ArithmeticOperation):
+            value = self.handle_arithmetic_operation(node.expression)
+            self.variables.set_variable(node.identifier, value)
+    
+    def handle_arithmetic_operation(self, node):
             first_term = self.evaluate(node.first_number)
             second_term = self.evaluate(node.second_number)
             match node.operator:
@@ -40,15 +56,6 @@ class Interpreter:
                     return first_term % second_term
                 case "^":
                     return first_term ** second_term
-
-        elif isinstance(node, AssignmentStatement):
-            return self.handle_assignment_statement(node)
-
-        elif isinstance(node, PrintStatement):
-            return print(node.expression)
-    
-    def handle_assignment_statement(self, node):
-        self.variables.set_variable(node.identifier, node.expression.value)
 
 def run_file():
     filename = sys.argv[1]
