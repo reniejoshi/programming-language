@@ -31,7 +31,7 @@ class Interpreter:
             return self.handle_assignment_statement(node)
 
         elif isinstance(node, PrintStatement):
-            return print(node.expression)
+            return print(self.evaluate(node.expression))
     
     def handle_assignment_statement(self, node):
         if isinstance(node.expression, Term):
