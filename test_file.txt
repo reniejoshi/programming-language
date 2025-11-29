@@ -12,4 +12,5 @@ output(message)
 
 if y > x {
     output("y is greater than x")
+    output("This is the second statement within the if statement body.")
 }

@@ -25,8 +25,6 @@ class Interpreter:
         self.variables = Variables()
 
     def evaluate(self, node):
-        print("evaluate() node", node)
-        
         if isinstance(node, AssignmentStatement):
             return self.handle_assignment_statement(node)
 
@@ -56,11 +54,15 @@ class Interpreter:
             self.variables.set_variable(node.identifier.value, value)
     
     def handle_if_statement(self, node):
-        # If the condition is True, evaluate body
         condition = self.evaluate(node.condition)
-        print("handle_if_statement() condition", condition)
+
+        # If condition is True, evaluate body
         if condition:
-            return self.evaluate(node.body)
+            body_statements = []
+            for statement in node.body:
+                body_statements.append(self.evaluate(statement))
+            return body_statements
+        
         # Else return
         else:
             return

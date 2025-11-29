@@ -138,8 +138,7 @@ class Parser:
     def parse_if_statement(self):
         self.consume("IF")
         condition = self.parse_expression()
-        # TODO: Fix body parsing logic to handle multiple statements
-        body = self.parse()[0]
+        body = self.parse()
         return IfStatement(condition, body)
     
     def parse_assignment_statement(self):
