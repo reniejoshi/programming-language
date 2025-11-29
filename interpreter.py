@@ -18,7 +18,6 @@ class Variables:
 
 # TODO: Require main() method
 # TODO: Raise errors
-# TODO: Handle comments
 # TODO: Handle input
 class Interpreter:
     def __init__(self):

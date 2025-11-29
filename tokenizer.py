@@ -43,6 +43,12 @@ class Tokenizer:
                 self.consume()
                 continue
 
+            # If current char is the start of a comment line, skip the line
+            elif self.current_char() == "/" and self.next_char() == "/":
+                while self.current_char() != "\n":
+                    self.consume()
+                continue
+
             # If current char is the start of an identifier in camel case or keyword, append the identifer or keyword to tokens
             elif self.current_char().isalpha():
                 start_index = self.index

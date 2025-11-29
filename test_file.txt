@@ -1,7 +1,9 @@
+// This is a comment
+
 x = 1
 y = 1.5
 z = x * y
-message = "Hello, world!"
+message = "Hello, world!" // This is another comment
 
 output(x)
 output(y)
