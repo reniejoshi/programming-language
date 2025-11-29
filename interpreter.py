@@ -1,6 +1,6 @@
 import sys
 from tokenizer import Tokenizer
-from parser import Parser
+from parser import Term, Integer, Float, String, PrintStatement, Identifier, AssignmentStatement, ArithmeticOperation, Parser
 
 class Variables:
     def __init__(self):
@@ -16,6 +16,21 @@ class Variables:
 class Interpreter:
     def __init__(self):
         self.variables = Variables()
+    def evaluate(self, node):
+        if isinstance(node, Term):
+            return node.value
+        
+        elif isinstance(node, Identifier):
+            return self.variables.get_variable(node.name)
+        
+        elif isinstance(node, ArithmeticOperation):
+            pass
+
+        elif isinstance(node, AssignmentStatement):
+            pass
+
+        elif isinstance(node, PrintStatement):
+            pass
 
 def run_file():
     filename = sys.argv[1]
@@ -34,5 +49,9 @@ def run_file():
     print("\nAbstract Syntax Tree nodes:")
     for node in ast:
         print(node)
+    
+    interpreter = Interpreter()
+    for statement in ast:
+        interpreter.evaluate(statement)
 
 run_file()
