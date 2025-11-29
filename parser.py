@@ -111,14 +111,35 @@ class Parser:
     def parse_string(self, string):
         return String(string)
     
+    def parse_identifier(self, name):
+        return Identifier(name)
+
     def parse_print_statement(self):
         self.consume("PRINT")
         expression = self.current()[1]
         return PrintStatement(expression)
     
     def parse_assignment_statement(self):
-        name = Identifier(self.current()[1])
+        name = self.parse_identifier(self.current()[1])
         self.consume("IDENTIFIER")
         self.consume("ASSIGNMENT")
-        expression = self.current()[1]
+        expression = self.parse_term()
         return AssignmentStatement(name, expression)
+    
+    def parse_term(self):
+        token_type = self.current()[0]
+        token_value = self.current()[1]
+
+        match token_type:
+            case "INTEGER":
+                self.consume("INTEGER")
+                return self.parse_integer(token_value)
+            case "FLOAT":
+                self.consume("FLOAT")
+                return self.parse_float(token_value)
+            case "STRING":
+                self.consume("STRING")
+                return self.parse_string(token_value)
+            case "IDENTIFIER":
+                self.consume("IDENTIFIER")
+                return self.parse_identifier(token_value)
