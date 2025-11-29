@@ -25,11 +25,8 @@ class PrintStatement:
         return f"PrintStatement(expression={self.expression})"
 
 class Identifier(Term):
-    def __init__(self, name):
-        self.name = name
-    
     def __repr__(self):
-        return f"Identifier(name={self.name})"
+        return f"Identifier(name={self.value})"
 
 class AssignmentStatement:
     def __init__(self, identifier, expression):
