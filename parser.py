@@ -70,11 +70,17 @@ class Parser:
             self.index += 1
 
     def parse(self):
+        # tokens is passed correctly
+        print("Parser parse() tokens")
+        for token in self.tokens:
+            print(token)
+
         # List to store parsed AST nodes
         statements = []
 
         # Loop to iterate through tokens
         while self.current()[0] != "EOF":
+            print("parse() self.current()[0]", self.current()[0])
             match self.current()[0]:
                 case "INTEGER":
                     statements.append(self.parse_integer(self.current()[1]))
@@ -86,8 +92,8 @@ class Parser:
                     statements.append(self.parse_assignment_statement())
                 case "PRINT":
                     statements.append(self.parse_print_statement())
-
-            self.index += 1
+                case _:
+                    self.index += 1
         
         return statements
     

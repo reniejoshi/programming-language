@@ -11,12 +11,12 @@ class Variables:
         self.variables[name] = value
     
     def get_variable(self, name):
-        print("get_variable() was called")
+        #print("get_variable() was called")
         if name in self.variables:
-            print("variable value", self.variables[name])
+            #print("variable value", self.variables[name])
             return self.variables[name]
         else:
-            self.print_variables()
+            #self.print_variables()
             raise NameError(f"Variable '{name}' not defined")
     
     # Method to print variables for debugging
@@ -30,7 +30,7 @@ class Interpreter:
         self.variables = Variables()
 
     def evaluate(self, node):
-        print("evaluate() node:", node)
+        #print("evaluate() node:", node)
 
         if isinstance(node, AssignmentStatement):
             return self.handle_assignment_statement(node)
@@ -45,7 +45,7 @@ class Interpreter:
             return self.handle_arithmetic_operation(node)
 
         elif isinstance(node, PrintStatement):
-            return print("PrintStatement.expression:", self.evaluate(node.expression))
+            return print(self.evaluate(node.expression))
     
     def handle_assignment_statement(self, node):
         if isinstance(node.expression, Term):
@@ -90,10 +90,11 @@ def run_file():
         print(node)
     
     interpreter = Interpreter()
-    print("\nevaluated statements:")
+    #print("\nevaluated statements:")
     for statement in ast:
-        evaluated_statement = interpreter.evaluate(statement)
-        print(evaluated_statement)
+        interpreter.evaluate(statement)
+        #evaluated_statement = interpreter.evaluate(statement)
+        #print(evaluated_statement)
     
     interpreter.variables.print_variables()
 
