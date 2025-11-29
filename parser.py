@@ -40,10 +40,10 @@ class AssignmentStatement:
         return f"AssignmentStatement(identifier={self.identifier}, expression={self.expression})"
 
 class ArithmeticOperation:
-    def __init__(self, first_number, operator, second_number):
-        self.first_number = first_number
+    def __init__(self, first_term, operator, second_term):
+        self.first_number = first_term
         self.operator = operator
-        self.second_number = second_number
+        self.second_number = second_term
     
     def __repr__(self):
         return f"ArithmeticOperation(first_number={self.first_number}, operator={self.operator}, second_number={self.second_number})"
