@@ -11,10 +11,19 @@ class Variables:
         self.variables[name] = value
     
     def get_variable(self, name):
+        print("get_variable() was called")
         if name in self.variables:
+            print("variable value", self.variables[name])
             return self.variables[name]
         else:
+            self.print_variables()
             raise NameError(f"Variable '{name}' not defined")
+    
+    # Method to print variables for debugging
+    def print_variables(self):
+        print("\nvariables: ")
+        for name in self.variables:
+            print(f"Name: {name}, Value: {self.variables[name]}")
 
 class Interpreter:
     def __init__(self):
@@ -22,27 +31,28 @@ class Interpreter:
 
     def evaluate(self, node):
         print("evaluate() node:", node)
-        if isinstance(node, Term):
-            return node.value
-        
+
+        if isinstance(node, AssignmentStatement):
+            return self.handle_assignment_statement(node)
+
         elif isinstance(node, Identifier):
-            return self.variables.get_variable(node.name)
+            return self.variables.get_variable(node.value)
+
+        elif isinstance(node, Term):
+            return node.value
         
         elif isinstance(node, ArithmeticOperation):
             return self.handle_arithmetic_operation(node)
-
-        elif isinstance(node, AssignmentStatement):
-            return self.handle_assignment_statement(node)
 
         elif isinstance(node, PrintStatement):
             return print("PrintStatement.expression:", self.evaluate(node.expression))
     
     def handle_assignment_statement(self, node):
         if isinstance(node.expression, Term):
-            self.variables.set_variable(node.identifier, node.expression.value)
+            self.variables.set_variable(node.identifier.value, node.expression.value)
         elif isinstance(node.expression, ArithmeticOperation):
             value = self.handle_arithmetic_operation(node.expression)
-            self.variables.set_variable(node.identifier, value)
+            self.variables.set_variable(node.identifier.value, value)
     
     def handle_arithmetic_operation(self, node):
             first_term = self.evaluate(node.first_number)
@@ -85,9 +95,6 @@ def run_file():
         evaluated_statement = interpreter.evaluate(statement)
         print(evaluated_statement)
     
-    variables = interpreter.variables.variables
-    print("\nvariables: ")
-    for name in variables:
-        print(f"Name: {name}, Value: {variables[name]}")
+    interpreter.variables.print_variables()
 
 run_file()
