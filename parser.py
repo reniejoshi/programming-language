@@ -70,11 +70,6 @@ class Parser:
             self.index += 1
 
     def parse(self):
-        # tokens is passed correctly
-        print("Parser parse() tokens")
-        for token in self.tokens:
-            print(token)
-
         # List to store parsed AST nodes
         statements = []
 
@@ -112,7 +107,6 @@ class Parser:
     def parse_print_statement(self):
         self.consume("PRINT")
         expression = self.parse_arithmetic_operation()
-        #print("parse_print_statement() expression:", expression)
         return PrintStatement(expression)
     
     def parse_assignment_statement(self):

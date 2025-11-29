@@ -11,27 +11,16 @@ class Variables:
         self.variables[name] = value
     
     def get_variable(self, name):
-        #print("get_variable() was called")
         if name in self.variables:
-            #print("variable value", self.variables[name])
             return self.variables[name]
         else:
-            #self.print_variables()
             raise NameError(f"Variable '{name}' not defined")
     
-    # Method to print variables for debugging
-    def print_variables(self):
-        print("\nvariables: ")
-        for name in self.variables:
-            print(f"Name: {name}, Value: {self.variables[name]}")
-
 class Interpreter:
     def __init__(self):
         self.variables = Variables()
 
     def evaluate(self, node):
-        #print("evaluate() node:", node)
-
         if isinstance(node, AssignmentStatement):
             return self.handle_assignment_statement(node)
 
@@ -90,12 +79,7 @@ def run_file():
         print(node)
     
     interpreter = Interpreter()
-    #print("\nevaluated statements:")
     for statement in ast:
         interpreter.evaluate(statement)
-        #evaluated_statement = interpreter.evaluate(statement)
-        #print(evaluated_statement)
-    
-    interpreter.variables.print_variables()
 
 run_file()
