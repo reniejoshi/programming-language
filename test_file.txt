@@ -9,3 +9,7 @@ output(x + y)
 output(z)
 output(10^2)
 output(message)
+
+if y > x {
+    output("y is greater than x")
+}

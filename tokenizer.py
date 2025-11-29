@@ -33,8 +33,8 @@ class Tokenizer:
         }
         # List of arithmetic operators
         arithmetic_operators = ["+", "-", "*", "/", "%", "^"]
-        # List of comparision operators
-        comparision_operators = ["==", "!=", ">", "<", ">=", "<="]
+        # List of comparison operators
+        comparison_operators = ["==", "!=", ">", "<", ">=", "<="]
 
         # Loop to iterate through code_string
         while self.current_char() != "EOF":
@@ -91,9 +91,15 @@ class Tokenizer:
                 self.consume()
                 continue
 
-            # If current char is the start of a comparision operator, append the comparision operator to tokens
-            elif self.current_char() + self.next_char() in comparision_operators:
-                self.tokens.append(("COMPARISION_OPERATOR", self.current_char() + self.next_char()))
+            # If current char is a comparison operator, append the comparison operator to tokens
+            elif self.current_char() in comparison_operators:
+                self.tokens.append(("COMPARISON_OPERATOR", self.current_char()))
+                self.consume()
+                continue
+
+            # If current char is the start of a comparison operator, append the comparison operator to tokens
+            elif self.current_char() + self.next_char() in comparison_operators:
+                self.tokens.append(("COMPARISON_OPERATOR", self.current_char() + self.next_char()))
                 self.consume(2)
                 continue
 
