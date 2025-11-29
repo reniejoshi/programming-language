@@ -2,28 +2,20 @@
 
 # Parent class for terms to inherit from
 class Term:
-    pass
+    def __init__(self, value):
+        self.value = value
 
 class Integer(Term):
-    def __init__(self, integer):
-        self.integer = integer
-    
     def __repr__(self):
-        return f"Integer(integer={self.integer})"
+        return f"Integer(value={self.value})"
 
 class Float(Term):
-    def __init__(self, float):
-        self.float = float
-    
     def __repr__(self):
-        return f"Float(float={self.float})"
+        return f"Float(value={self.value})"
 
 class String(Term):
-    def __init__(self, string):
-        self.string = string
-    
     def __repr__(self):
-        return f"String(string={self.string})"
+        return f"String(value={self.value})"
 
 class PrintStatement:
     def __init__(self, expression):
