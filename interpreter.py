@@ -21,6 +21,7 @@ class Interpreter:
         self.variables = Variables()
 
     def evaluate(self, node):
+        print("evaluate() node:", node)
         if isinstance(node, Term):
             return node.value
         

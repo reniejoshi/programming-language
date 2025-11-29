@@ -106,6 +106,7 @@ class Parser:
     def parse_print_statement(self):
         self.consume("PRINT")
         expression = self.current()[1]
+        print("parse_print_statement() expression:", expression)
         return PrintStatement(expression)
     
     def parse_assignment_statement(self):
