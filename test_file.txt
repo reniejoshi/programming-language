@@ -1,5 +1,11 @@
 x = 1
 y = 1.5
+z = x * y
+message = "Hello, world!"
 
 output(x)
 output(y)
+output(x + y)
+output(z)
+output(10^2)
+output(message)
