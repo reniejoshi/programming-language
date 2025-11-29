@@ -31,6 +31,14 @@ class PrintStatement:
     def __repr__(self):
         return f"PrintStatement(expression={self.expression})"
 
+class IfStatement:
+    def __init__(self, condition, body):
+        self.condition = condition
+        self.body = body
+    
+    def __repr__(self):
+        return f"IfStatement(condition={self.condition}, body={self.body})"
+
 class Identifier(Term):
     def __repr__(self):
         return f"Identifier(name={self.value})"
@@ -97,6 +105,8 @@ class Parser:
                     statements.append(self.parse_assignment_statement())
                 case "PRINT":
                     statements.append(self.parse_print_statement())
+                case "IF":
+                    statements.append(self.parse_if_statement())
                 case _:
                     self.index += 1
         
@@ -118,6 +128,12 @@ class Parser:
         self.consume("PRINT")
         expression = self.parse_expression()
         return PrintStatement(expression)
+    
+    def parse_if_statement(self):
+        self.consume("IF")
+        condition = self.parse_expression()
+        body = self.parse()
+        return IfStatement(condition, body)
     
     def parse_assignment_statement(self):
         name = self.parse_identifier(self.current_token()[1])
@@ -146,9 +162,17 @@ class Parser:
     
     def parse_expression(self):
         expression = self.parse_term()
+
         while self.current_token()[0] == "ARITHMETIC_OPERATOR":
             operator = self.current_token()[1]
             self.consume("ARITHMETIC_OPERATOR")
             next_term = self.parse_term()
             expression = ArithmeticOperation(expression, operator, next_term)
+        
+        while self.current_token()[0] == "COMPARISON_OPERATOR":
+            operator = self.current_token()[1]
+            self.consume("COMPARISON_OPERATOR")
+            next_term = self.parse_term()
+            expression = ComparisonOperation(expression, operator, next_term)
+        
         return expression
