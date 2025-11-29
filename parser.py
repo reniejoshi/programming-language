@@ -123,7 +123,7 @@ class Parser:
         name = self.parse_identifier(self.current()[1])
         self.consume("IDENTIFIER")
         self.consume("ASSIGNMENT")
-        expression = self.parse_term()
+        expression = self.parse_arithmetic_operation()
         return AssignmentStatement(name, expression)
     
     def parse_term(self):
@@ -143,3 +143,12 @@ class Parser:
             case "IDENTIFIER":
                 self.consume("IDENTIFIER")
                 return self.parse_identifier(token_value)
+    
+    def parse_arithmetic_operation(self):
+        expression = self.parse_term()
+        while self.current()[0] == "ARITHMETIC_OPERATOR":
+            operator = self.current()[1]
+            self.consume("ARITHMETIC_OPERATOR")
+            next_term = self.parse_term()
+            expression = ArithmeticOperation(expression, operator, next_term)
+        return expression
