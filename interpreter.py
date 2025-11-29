@@ -25,7 +25,21 @@ class Interpreter:
             return self.variables.get_variable(node.name)
         
         elif isinstance(node, ArithmeticOperation):
-            pass
+            first_term = self.evaluate(node.first_number)
+            second_term = self.evaluate(node.second_number)
+            match node.operator:
+                case "+":
+                    return first_term + second_term
+                case "-":
+                    return first_term - second_term
+                case "*":
+                    return first_term * second_term
+                case "/":
+                    return first_term / second_term
+                case "%":
+                    return first_term % second_term
+                case "^":
+                    return first_term ** second_term
 
         elif isinstance(node, AssignmentStatement):
             return self.handle_assignment_statement(node)
