@@ -1,6 +1,6 @@
 import sys
 from tokenizer import Tokenizer
-from parser import Term, Integer, Float, String, PrintStatement, Identifier, AssignmentStatement, ArithmeticOperation, Parser
+from parser import Term, Integer, Float, String, PrintStatement, Identifier, AssignmentStatement, ArithmeticOperation, ComparisonOperation, Parser
 
 class Variables:
     def __init__(self):
@@ -36,6 +36,9 @@ class Interpreter:
         
         elif isinstance(node, ArithmeticOperation):
             return self.handle_arithmetic_operation(node)
+        
+        elif isinstance(node, ComparisonOperation):
+            return self.handle_comparison_operation(node)
 
         elif isinstance(node, PrintStatement):
             return print(self.evaluate(node.expression))
@@ -63,6 +66,23 @@ class Interpreter:
                 return first_term % second_term
             case "^":
                 return first_term ** second_term
+
+    def handle_comparison_operation(self, node):
+        first_term = self.evaluate(node.first_term)
+        second_term = self.evaluate(node.second_term)
+        match node.operator:
+            case "==":
+                return first_term == second_term
+            case "!=":
+                return first_term != second_term
+            case ">":
+                return first_term > second_term
+            case "<":
+                return first_term < second_term
+            case ">=":
+                return first_term >= second_term
+            case "<=":
+                return first_term <= second_term
 
 def run_file():
     filename = sys.argv[1]
