@@ -15,7 +15,11 @@ class Variables:
             return self.variables[name]
         else:
             raise NameError(f"Variable '{name}' not defined")
-    
+
+# TODO: Require main() method
+# TODO: Raise errors
+# TODO: Handle comments
+# TODO: Handle input
 class Interpreter:
     def __init__(self):
         self.variables = Variables()
