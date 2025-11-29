@@ -105,7 +105,7 @@ class Parser:
 
     def parse_print_statement(self):
         self.consume("PRINT")
-        expression = self.current()[1]
+        expression = self.parse_arithmetic_operation()
         print("parse_print_statement() expression:", expression)
         return PrintStatement(expression)
     
