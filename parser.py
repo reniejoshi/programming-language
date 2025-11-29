@@ -5,12 +5,7 @@ class Term:
     def __init__(self, value):
         self.value = value
 
-# Parent class for operations to inherit from
-class Operation:
-    def __init__(self, first_term, operator, second_term):
-        self.first_term = first_term
-        self.operator = operator
-        self.second_term = second_term
+# Child classes of Term class
 
 class Integer(Term):
     def __repr__(self):
@@ -23,6 +18,29 @@ class Float(Term):
 class String(Term):
     def __repr__(self):
         return f"String(value={self.value})"
+
+class Identifier(Term):
+    def __repr__(self):
+        return f"Identifier(name={self.value})"
+
+# Parent class for operations to inherit from
+class Operation:
+    def __init__(self, first_term, operator, second_term):
+        self.first_term = first_term
+        self.operator = operator
+        self.second_term = second_term
+
+# Child classes of Operation class
+
+class ArithmeticOperation(Operation):
+    def __repr__(self):
+        return f"ArithmeticOperation(first_term={self.first_term}, operator={self.operator}, second_term={self.second_term})"
+
+class ComparisonOperation(Operation):
+    def __repr__(self):
+        return f"ComparisionOperation(first_term={self.first_term}, operator={self.operator}, second_term={self.second_term})"
+
+# Statements
 
 class PrintStatement:
     def __init__(self, expression):
@@ -39,10 +57,6 @@ class IfStatement:
     def __repr__(self):
         return f"IfStatement(condition={self.condition}, body={self.body})"
 
-class Identifier(Term):
-    def __repr__(self):
-        return f"Identifier(name={self.value})"
-
 class AssignmentStatement:
     def __init__(self, identifier, expression):
         self.identifier = identifier
@@ -50,14 +64,6 @@ class AssignmentStatement:
     
     def __repr__(self):
         return f"AssignmentStatement(identifier={self.identifier}, expression={self.expression})"
-
-class ArithmeticOperation(Operation):
-    def __repr__(self):
-        return f"ArithmeticOperation(first_term={self.first_term}, operator={self.operator}, second_term={self.second_term})"
-
-class ComparisonOperation(Operation):
-    def __repr__(self):
-        return f"ComparisionOperation(first_term={self.first_term}, operator={self.operator}, second_term={self.second_term})"
 
 # This class translates tokens into Abstract Syntax Tree node types for the interpreter
 class Parser:
