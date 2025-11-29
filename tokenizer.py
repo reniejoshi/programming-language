@@ -52,9 +52,9 @@ class Tokenizer:
                     self.i += 1
                 number = code_string[start_index:self.i]
                 if Tokenizer.is_int(number):
-                    self.tokens.append(("INTEGER", number))
+                    self.tokens.append(("INTEGER", int(number)))
                 elif Tokenizer.is_float(number):
-                    self.tokens.append(("FLOAT", number))
+                    self.tokens.append(("FLOAT", float(number)))
                 continue
 
             # If char is start of a string, append the string to tokens
