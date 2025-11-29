@@ -1,6 +1,7 @@
 // This is a comment
 
-x = 1
+output("Enter value for x: ")
+x = input()
 y = 1.5
 z = x * y
 message = "Hello, world!" // This is another comment

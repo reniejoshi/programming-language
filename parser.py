@@ -49,6 +49,10 @@ class PrintStatement:
     def __repr__(self):
         return f"PrintStatement(expression={self.expression})"
 
+class InputStatement:
+    def __repr__(self):
+        return f"InputStatement()"
+
 class IfStatement:
     def __init__(self, condition, body):
         self.condition = condition
@@ -110,6 +114,8 @@ class Parser:
                     statements.append(self.parse_assignment_statement())
                 case "PRINT":
                     statements.append(self.parse_print_statement())
+                case "INPUT":
+                    statements.append(self.parse_input_statement())
                 case "IF":
                     statements.append(self.parse_if_statement())
                 case _:
@@ -134,6 +140,10 @@ class Parser:
         expression = self.parse_expression()
         return PrintStatement(expression)
     
+    def parse_input_statement(self):
+        self.consume("INPUT")
+        return InputStatement()
+
     def parse_if_statement(self):
         self.consume("IF")
         condition = self.parse_expression()
