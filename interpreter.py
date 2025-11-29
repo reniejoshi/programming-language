@@ -11,7 +11,10 @@ class Variables:
         self.variables[name] = value
     
     def get_variable(self, name):
-        return self.variables[name]
+        if name in self.variables:
+            return self.variables[name]
+        else:
+            raise NameError(f"Variable '{name}' not defined")
 
 class Interpreter:
     def __init__(self):
