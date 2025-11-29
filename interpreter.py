@@ -48,8 +48,8 @@ class Interpreter:
             self.variables.set_variable(node.identifier.value, value)
     
     def handle_arithmetic_operation(self, node):
-            first_term = self.evaluate(node.first_number)
-            second_term = self.evaluate(node.second_number)
+            first_term = self.evaluate(node.first_term)
+            second_term = self.evaluate(node.second_term)
             match node.operator:
                 case "+":
                     return first_term + second_term

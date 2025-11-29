@@ -5,6 +5,13 @@ class Term:
     def __init__(self, value):
         self.value = value
 
+# Parent class for operations to inherit from
+class Operation:
+    def __init__(self, first_term, operator, second_term):
+        self.first_term = first_term
+        self.operator = operator
+        self.second_term = second_term
+
 class Integer(Term):
     def __repr__(self):
         return f"Integer(value={self.value})"
@@ -36,14 +43,13 @@ class AssignmentStatement:
     def __repr__(self):
         return f"AssignmentStatement(identifier={self.identifier}, expression={self.expression})"
 
-class ArithmeticOperation:
-    def __init__(self, first_term, operator, second_term):
-        self.first_number = first_term
-        self.operator = operator
-        self.second_number = second_term
-    
+class ArithmeticOperation(Operation):
     def __repr__(self):
-        return f"ArithmeticOperation(first_number={self.first_number}, operator={self.operator}, second_number={self.second_number})"
+        return f"ArithmeticOperation(first_term={self.first_term}, operator={self.operator}, second_term={self.second_term})"
+
+class ComparisonOperation(Operation):
+    def __repr__(self):
+        return f"ComparisionOperation(first_term={self.first_term}, operator={self.operator}, second_term={self.second_term})"
 
 # This class translates tokens into Abstract Syntax Tree node types for the interpreter
 class Parser:
