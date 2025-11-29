@@ -10,4 +10,5 @@ class Variables:
         return self.variables[name]
 
 class Interpreter:
-    pass
+    def __init__(self):
+        self.variables = Variables()
