@@ -1,20 +1,24 @@
 # Abstract Syntax Tree node types
 
-class Integer:
+# Parent class for terms to inherit from
+class Term:
+    pass
+
+class Integer(Term):
     def __init__(self, integer):
         self.integer = integer
     
     def __repr__(self):
         return f"Integer(integer={self.integer})"
 
-class Float:
+class Float(Term):
     def __init__(self, float):
         self.float = float
     
     def __repr__(self):
         return f"Float(float={self.float})"
 
-class String:
+class String(Term):
     def __init__(self, string):
         self.string = string
     
@@ -28,7 +32,7 @@ class PrintStatement:
     def __repr__(self):
         return f"PrintStatement(expression={self.expression})"
 
-class Identifier:
+class Identifier(Term):
     def __init__(self, name):
         self.name = name
     
