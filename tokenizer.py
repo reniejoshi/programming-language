@@ -15,7 +15,7 @@ class Tokenizer:
             "if": "IF"
         }
         # List of arithmetic operators
-        arithmetic_operators = ["+", "-", "*", "/", "^"]
+        arithmetic_operators = ["+", "-", "*", "/", "%", "^"]
         # List of comparision operators
         comparision_operators = ["==", "!=", ">", "<", ">=", "<="]
 
