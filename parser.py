@@ -53,37 +53,41 @@ class Parser:
         self.index = 0
     
     # Method that returns the current token
-    def current(self):
+    def current_token(self):
         if self.index < len(self.tokens):
             return self.tokens[self.index]
         else:
             return ("EOF", "")
-    
-    def next_index(self):
+
+    # Method that returns the next token    
+    def next_token(self):
         if self.index + 1 < len(self.tokens):
             return self.tokens[self.index + 1]
         else:
             return ("EOF", "")
     
+    # Method that increments index if the current token is the token type
     def consume(self, token_type):
-        if self.current()[0] == token_type:
+        if self.current_token()[0] == token_type:
             self.index += 1
+        else:
+            raise SyntaxError(f"Expected {token_type} but found {self.current_token()[0]}")
 
     def parse(self):
         # List to store parsed AST nodes
         statements = []
 
         # Loop to iterate through tokens
-        while self.current()[0] != "EOF":
-            print("parse() self.current()[0]", self.current()[0])
-            match self.current()[0]:
+        while self.current_token()[0] != "EOF":
+            print("parse() self.current_token()[0]", self.current_token()[0])
+            match self.current_token()[0]:
                 case "INTEGER":
-                    statements.append(self.parse_integer(self.current()[1]))
+                    statements.append(self.parse_integer(self.current_token()[1]))
                 case "FLOAT":
-                    statements.append(self.parse_float(self.current()[1]))
+                    statements.append(self.parse_float(self.current_token()[1]))
                 case "STRING":
-                    statements.append(self.parse_string(self.current()[1]))
-                case "IDENTIFIER" if self.next_index()[0] == "ASSIGNMENT":
+                    statements.append(self.parse_string(self.current_token()[1]))
+                case "IDENTIFIER" if self.next_token()[0] == "ASSIGNMENT":
                     statements.append(self.parse_assignment_statement())
                 case "PRINT":
                     statements.append(self.parse_print_statement())
@@ -110,15 +114,15 @@ class Parser:
         return PrintStatement(expression)
     
     def parse_assignment_statement(self):
-        name = self.parse_identifier(self.current()[1])
+        name = self.parse_identifier(self.current_token()[1])
         self.consume("IDENTIFIER")
         self.consume("ASSIGNMENT")
         expression = self.parse_expression()
         return AssignmentStatement(name, expression)
     
     def parse_term(self):
-        token_type = self.current()[0]
-        token_value = self.current()[1]
+        token_type = self.current_token()[0]
+        token_value = self.current_token()[1]
 
         match token_type:
             case "INTEGER":
@@ -136,8 +140,8 @@ class Parser:
     
     def parse_expression(self):
         expression = self.parse_term()
-        while self.current()[0] == "ARITHMETIC_OPERATOR":
-            operator = self.current()[1]
+        while self.current_token()[0] == "ARITHMETIC_OPERATOR":
+            operator = self.current_token()[1]
             self.consume("ARITHMETIC_OPERATOR")
             next_term = self.parse_term()
             expression = ArithmeticOperation(expression, operator, next_term)
