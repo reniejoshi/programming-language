@@ -31,7 +31,7 @@ class Interpreter:
             return self.handle_assignment_statement(node)
 
         elif isinstance(node, PrintStatement):
-            return print(self.evaluate(node.expression))
+            return print("PrintStatement.expression:", self.evaluate(node.expression))
     
     def handle_assignment_statement(self, node):
         if isinstance(node.expression, Term):
@@ -76,8 +76,10 @@ def run_file():
         print(node)
     
     interpreter = Interpreter()
+    print("\nevaluated statements:")
     for statement in ast:
-        interpreter.evaluate(statement)
+        evaluated_statement = interpreter.evaluate(statement)
+        print(evaluated_statement)
     
     variables = interpreter.variables.variables
     print("\nvariables: ")
