@@ -148,11 +148,7 @@ class Parser:
             case "INPUT":
                 return self.parse_input_statement()
             case "IF":
-                return self.parse_if_statement()
-            case "ELIF":
-                return self.parse_elif_statement()
-            case "ELSE":
-                return self.parse_else_statement()
+                return self.parse_conditional_statement()
             case _:
                 self.index += 1
                 return
@@ -187,6 +183,19 @@ class Parser:
     def parse_input_statement(self):
         self.consume("INPUT")
         return InputStatement()
+
+    def parse_conditional_statement(self):
+        if_statement = self.parse_if_statement()
+
+        elif_statements = []
+        while self.current_token()[0] == "ELIF":
+            elif_statements.append(self.parse_elif_statement())
+        
+        else_statement = None
+        if self.current_token()[0] == "ELSE":
+            else_statement = self.parse_else_statement()
+        
+        return ConditionalStatement(if_statement, elif_statements, else_statement)
 
     def parse_if_statement(self):
         self.consume("IF")
