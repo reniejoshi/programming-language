@@ -174,6 +174,17 @@ class Parser:
         body = self.parse()
         return IfStatement(condition, body)
     
+    def parse_elif_statement(self):
+        self.consume("ELIF")
+        condition = self.parse_expression()
+        body = self.parse()
+        return ElifStatement(condition, body)
+    
+    def parse_else_statement(self):
+        self.consume("ELSE")
+        body = self.parse()
+        return ElseStatement(body)
+    
     def parse_assignment_statement(self):
         name = self.parse_identifier(self.current_token()[1])
         self.consume("IDENTIFIER")
