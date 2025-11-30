@@ -33,7 +33,7 @@ if user_num < 0 {
 
 x = 1
 y = x + 1
-output(y ** x)
+output(y ^ x)
 pi = 3.14
 output(pi)
 
@@ -50,4 +50,4 @@ output("Enter a base: ")
 base = input()
 output('Enter an exponent: ')
 exponent = input()
-output(base ** exponent)
+output(base ^ exponent)
