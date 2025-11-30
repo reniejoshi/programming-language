@@ -14,8 +14,8 @@ output(message)
 
 if y > x {
     output("y is greater than x")
-    //output("This is the second statement within the if statement body.")
-} else if x > y {
+    output("This is the second statement within the if statement body.")
+} elsif x > y {
     ouput("x is greater than y")
 } else {
     ouput("y is equal to x")

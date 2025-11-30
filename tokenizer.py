@@ -30,7 +30,7 @@ class Tokenizer:
             "output": "PRINT",
             "input": "INPUT",
             "if": "IF",
-            "else if": "ELIF",
+            "elsif": "ELIF",
             "else": "ELSE"
         }
         # List of arithmetic operators
