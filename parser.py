@@ -115,6 +115,8 @@ class Parser:
         self.tokens = tokens
         # Index in tokens
         self.index = 0
+        # Boolean representing if main function is found
+        self.is_main_function_defined = False
     
     # Method that returns the current token
     def current_token(self):
@@ -165,9 +167,24 @@ class Parser:
                 return self.parse_input_statement()
             case "IF":
                 return self.parse_conditional_statement()
+            case "FUNCTION":
+                if self.next_token()[0] == "MAIN":
+                    if self.is_main_function_defined:
+                        raise SyntaxError(f"Multiple main functions found")
+                    else:
+                        self.is_main_function_defined = True
+                        return self.parse_main_function()
             case _:
                 self.index += 1
                 return
+
+    def parse_main_function(self):
+        self.consume("FUNCTION")
+        self.consume("MAIN")
+        self.consume("OPEN_PARENTHESIS")
+        self.consume("CLOSE_PARENTHESIS")
+        body = self.parse_body()
+        return MainFunction(body)
 
     def parse_body(self):
         body = []
