@@ -85,12 +85,10 @@ class Interpreter:
         
         if elif_statements != None:
             elif_body_statements = []
-            index = 0
-            while elif_body_statements == [] and index < len(elif_statements):
-                elif_body_statements = self.handle_if_statement(elif_statements[index])
-                index += 1
-            if elif_body_statements != []:
-                return elif_body_statements
+            for elif_statement in elif_statements:
+                elif_body_statements = self.handle_if_statement(elif_statement)
+                if elif_body_statements != []:
+                    return elif_body_statements
         
         if else_statement != None:
             else_body_statement = self.handle_else_statement(else_statement)
