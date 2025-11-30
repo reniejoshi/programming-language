@@ -156,7 +156,15 @@ class Parser:
             case _:
                 self.index += 1
                 return
-    
+
+    def parse_body(self):
+        body = []
+        self.consume("OPEN_BRACE")
+        while self.current_token()[0] != "CLOSE_BRACE":
+            body.append(self.parse_statement())
+        self.consume("CLOSE_BRACE")
+        return body
+
     def parse_integer(self, integer):
         return Integer(integer)
     
@@ -181,18 +189,18 @@ class Parser:
     def parse_if_statement(self):
         self.consume("IF")
         condition = self.parse_expression()
-        body = self.parse_statement()
+        body = self.parse_body()
         return IfStatement(condition, body)
     
     def parse_elif_statement(self):
         self.consume("ELIF")
         condition = self.parse_expression()
-        body = self.parse_statement()
+        body = self.parse_body()
         return ElifStatement(condition, body)
     
     def parse_else_statement(self):
         self.consume("ELSE")
-        body = self.parse_statement()
+        body = self.parse_body()
         return ElseStatement(body)
     
     def parse_assignment_statement(self):
