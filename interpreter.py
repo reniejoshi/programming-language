@@ -1,6 +1,21 @@
 import sys
 from tokenizer import Tokenizer
-from parser import Term, Integer, Float, String, PrintStatement, InputStatement, Identifier, AssignmentStatement, IfStatement, ArithmeticOperation, ComparisonOperation, Parser
+from parser import (
+    Term,
+    Integer,
+    Float,
+    String,
+    Identifier,
+    PrintStatement,
+    InputStatement,
+    AssignmentStatement,
+    ConditionalStatement,
+    IfStatement,
+    ElifStatement,
+    ElseStatement,
+    ArithmeticOperation,
+    ComparisonOperation,
+    Parser)
 
 class Variables:
     def __init__(self):
