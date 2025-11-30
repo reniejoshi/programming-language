@@ -127,6 +127,8 @@ class Parser:
 
         # Loop to iterate through tokens
         while self.current_token()[0] != "EOF":
+            print("parser() self.current_token()[0]:", self.current_token()[0])
+            print("parser() self.current_token()[1]", self.current_token()[1])
             match self.current_token()[0]:
                 case "INTEGER":
                     statements.append(self.parse_integer(self.current_token()[1]))
