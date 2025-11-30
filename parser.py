@@ -93,6 +93,22 @@ class ElseStatement:
     def __repr__(self):
         return f"ElseStatement(body={self.body})"
 
+class Function:
+    def __init__(self, identifier, parameters, body):
+        self.identifier = identifier
+        self.parameters = parameters
+        self.body = body
+    
+    def __repr__(self):
+        return f"Function(body={self.body})"
+
+class MainFunction(Function):
+    def __init__(self, body):
+        super().__init__("main", [], body)
+
+    def __repr__(self):
+        return f"MainFunction(body={self.body})"
+
 # This class translates tokens into Abstract Syntax Tree node types for the interpreter
 class Parser:
     def __init__(self, tokens):
