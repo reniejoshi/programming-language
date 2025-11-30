@@ -24,3 +24,30 @@ if y > x {
 output("Enter your name:")
 name = input()
 output("Hello, " + name + "!")
+
+output("Enter a number:")
+user_num = input()
+if user_num < 0 {
+    output("Negative")
+}
+
+x = 1
+y = x + 1
+output(y ** x)
+pi = 3.14
+output(pi)
+
+// This is a comment
+output("Enter a number: ")
+user_input = input()
+output(user_input)
+
+output("Hello, world!")
+output('Hello, world again!')
+
+// Calculate exponentiation
+output("Enter a base: ")
+base = input()
+output('Enter an exponent: ')
+exponent = input()
+output(base ** exponent)
