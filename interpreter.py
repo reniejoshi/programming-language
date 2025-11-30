@@ -59,8 +59,8 @@ class Interpreter:
         elif isinstance(node, InputStatement):
             return self.handle_input_statement()
         
-        elif isinstance(node, IfStatement):
-            return self.handle_if_statement(node)
+        elif isinstance(node, ConditionalStatement):
+            return self.handle_conditional_statement(node)
     
     def handle_assignment_statement(self, node):
         name = node.identifier.value
@@ -74,19 +74,42 @@ class Interpreter:
         
         self.variables.set_variable(name, value)
     
+    def handle_conditional_statement(self, node):
+        if_statement = node.if_statement
+        elif_statements = node.elif_statements
+        else_statement = node.else_statement
+
+        if_body_statements = self.handle_if_statement(if_statement)
+        if if_body_statements != []:
+            return if_body_statements
+        else:
+            elif_body_statements = []
+            index = 0
+            while elif_body_statements == [] and index < len(elif_statements):
+                elif_body_statements = self.handle_if_statement(elif_statements[index])
+                index += 1
+            if elif_body_statements != []:
+                return elif_body_statements
+            else:
+                else_body_statement = self.handle_else_statement(else_statement)
+                return else_body_statement
+
     def handle_if_statement(self, node):
         condition = self.evaluate(node.condition)
+        body_statements = []
 
         # If condition is True, evaluate body
         if condition:
-            body_statements = []
             for statement in node.body:
                 body_statements.append(self.evaluate(statement))
-            return body_statements
         
-        # Else return
-        else:
-            return
+        return body_statements
+
+    def handle_else_statement(self, node):
+        body_statements = []
+        for statement in node.body:
+            body_statements.append(self.evaluate(statement))
+        return body_statements
 
     def handle_input_statement(self):
         return input()
