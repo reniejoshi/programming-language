@@ -142,6 +142,10 @@ class Parser:
                     statements.append(self.parse_input_statement())
                 case "IF":
                     statements.append(self.parse_if_statement())
+                case "ELIF":
+                    statements.append(self.parse_elif_statement())
+                case "ELSE":
+                    statements.append(self.parse_else_statement())
                 case _:
                     self.index += 1
         
