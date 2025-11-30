@@ -34,7 +34,7 @@ class Tokenizer:
             "if": "IF",
             "elsif": "ELIF",
             "else": "ELSE",
-            "function": "DEF",
+            "function": "FUNCTION",
             "run": "MAIN"
         }
         # List of arithmetic operators
