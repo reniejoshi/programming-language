@@ -33,7 +33,9 @@ class Tokenizer:
             "input": "INPUT",
             "if": "IF",
             "elsif": "ELIF",
-            "else": "ELSE"
+            "else": "ELSE",
+            "function": "DEF",
+            "run": "MAIN"
         }
         # List of arithmetic operators
         arithmetic_operators = ["+", "-", "*", "/", "%", "^"]
