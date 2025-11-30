@@ -179,7 +179,9 @@ class Parser:
 
     def parse_print_statement(self):
         self.consume("PRINT")
+        self.consume("OPEN_PARENTHESIS")
         expression = self.parse_expression()
+        self.consume("CLOSE_PARENTHESIS")
         return PrintStatement(expression)
     
     def parse_input_statement(self):
