@@ -123,6 +123,18 @@ class Tokenizer:
                 self.consume()
                 continue
 
+            # If curren char is open parenthesis, append open parenthesis to tokens
+            elif self.current_char() == "(":
+                self.tokens.append(("OPEN_PARENTHESIS", self.current_char()))
+                self.consume()
+                continue
+            
+            # If curren char is close parenthesis, append close parenthesis to tokens
+            elif self.current_char() == ")":
+                self.tokens.append(("CLOSE_PARENTHESIS", self.current_char()))
+                self.consume()
+                continue
+
             # If current char is newline, append new line to tokens
             elif self.current_char() == "\n":
                 self.tokens.append(("NEWLINE", self.current_char()))
