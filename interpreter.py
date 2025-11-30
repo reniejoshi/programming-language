@@ -184,6 +184,9 @@ def run_file():
         if isinstance(node, MainFunction):
             main_function = node
             break
+    
+    if main_function == None:
+        raise SyntaxError("Main function not found")
 
     interpreter = Interpreter()
     for statement in main_function.body:
