@@ -16,9 +16,9 @@ if y > x {
     output("y is greater than x")
     output("This is the second statement within the if statement body.")
 } elsif x > y {
-    ouput("x is greater than y")
+    output("x is greater than y")
 } else {
-    ouput("y is equal to x")
+    output("y is equal to x")
 }
 
 output("Enter your name:")
