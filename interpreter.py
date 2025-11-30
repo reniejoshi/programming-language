@@ -82,7 +82,8 @@ class Interpreter:
         if_body_statements = self.handle_if_statement(if_statement)
         if if_body_statements != []:
             return if_body_statements
-        else:
+        
+        if elif_statements != None:
             elif_body_statements = []
             index = 0
             while elif_body_statements == [] and index < len(elif_statements):
@@ -90,9 +91,12 @@ class Interpreter:
                 index += 1
             if elif_body_statements != []:
                 return elif_body_statements
-            else:
-                else_body_statement = self.handle_else_statement(else_statement)
-                return else_body_statement
+        
+        if else_statement != None:
+            else_body_statement = self.handle_else_statement(else_statement)
+            return else_body_statement
+        
+        return []
 
     def handle_if_statement(self, node):
         condition = self.evaluate(node.condition)
