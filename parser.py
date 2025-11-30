@@ -53,6 +53,15 @@ class InputStatement:
     def __repr__(self):
         return f"InputStatement()"
 
+class ConditionalStatement:
+    def __init__(self, if_statement, elif_statements, else_statement):
+        self.if_statement = if_statement
+        self.elif_statements = elif_statements
+        self.else_statement = else_statement
+    
+    def __repr__(self):
+        return f"ConditionalStatement(if_statement={self.if_statement}, elif_statements={self.elif_statements}, else_statement={self.else_statement})"
+
 class IfStatement:
     def __init__(self, condition, body):
         self.condition = condition
