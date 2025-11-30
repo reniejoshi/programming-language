@@ -129,29 +129,33 @@ class Parser:
         while self.current_token()[0] != "EOF":
             print("parser() self.current_token()[0]:", self.current_token()[0])
             print("parser() self.current_token()[1]", self.current_token()[1])
-            match self.current_token()[0]:
-                case "INTEGER":
-                    statements.append(self.parse_integer(self.current_token()[1]))
-                case "FLOAT":
-                    statements.append(self.parse_float(self.current_token()[1]))
-                case "STRING":
-                    statements.append(self.parse_string(self.current_token()[1]))
-                case "IDENTIFIER" if self.next_token()[0] == "ASSIGNMENT":
-                    statements.append(self.parse_assignment_statement())
-                case "PRINT":
-                    statements.append(self.parse_print_statement())
-                case "INPUT":
-                    statements.append(self.parse_input_statement())
-                case "IF":
-                    statements.append(self.parse_if_statement())
-                case "ELIF":
-                    statements.append(self.parse_elif_statement())
-                case "ELSE":
-                    statements.append(self.parse_else_statement())
-                case _:
-                    self.index += 1
-        
+            statements.append(self.parse_statement())
+         
         return statements
+    
+    def parse_statement(self):
+        match self.current_token()[0]:
+            case "INTEGER":
+                return self.parse_integer(self.current_token()[1])
+            case "FLOAT":
+                return self.parse_float(self.current_token()[1])
+            case "STRING":
+                return self.parse_string(self.current_token()[1])
+            case "IDENTIFIER" if self.next_token()[0] == "ASSIGNMENT":
+                return self.parse_assignment_statement()
+            case "PRINT":
+                return self.parse_print_statement()
+            case "INPUT":
+                return self.parse_input_statement()
+            case "IF":
+                return self.parse_if_statement()
+            case "ELIF":
+                return self.parse_elif_statement()
+            case "ELSE":
+                return self.parse_else_statement()
+            case _:
+                self.index += 1
+                return
     
     def parse_integer(self, integer):
         return Integer(integer)
@@ -177,18 +181,18 @@ class Parser:
     def parse_if_statement(self):
         self.consume("IF")
         condition = self.parse_expression()
-        body = self.parse()
+        body = self.parse_statement()
         return IfStatement(condition, body)
     
     def parse_elif_statement(self):
         self.consume("ELIF")
         condition = self.parse_expression()
-        body = self.parse()
+        body = self.parse_statement()
         return ElifStatement(condition, body)
     
     def parse_else_statement(self):
         self.consume("ELSE")
-        body = self.parse()
+        body = self.parse_statement()
         return ElseStatement(body)
     
     def parse_assignment_statement(self):
