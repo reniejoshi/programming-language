@@ -170,7 +170,7 @@ class Parser:
             case "FUNCTION":
                 if self.next_token()[0] == "MAIN":
                     if self.is_main_function_defined:
-                        raise SyntaxError(f"Multiple main functions found")
+                        raise SyntaxError("Multiple main functions found")
                     else:
                         self.is_main_function_defined = True
                         return self.parse_main_function()
