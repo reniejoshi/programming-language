@@ -29,7 +29,9 @@ class Tokenizer:
         keywords = {
             "output": "PRINT",
             "input": "INPUT",
-            "if": "IF"
+            "if": "IF",
+            "else if": "ELIF",
+            "else": "ELSE"
         }
         # List of arithmetic operators
         arithmetic_operators = ["+", "-", "*", "/", "%", "^"]

@@ -61,6 +61,21 @@ class IfStatement:
     def __repr__(self):
         return f"IfStatement(condition={self.condition}, body={self.body})"
 
+class ElifStatement:
+    def __init__(self, condition, body):
+        self.condition = condition
+        self.body = body
+    
+    def __repr__(self):
+        return f"ElifStatement(condition={self.condition}, body={self.body})"
+
+class ElseStatement:
+    def __init__(self, body):
+        self.body = body
+    
+    def __repr__(self):
+        return f"ElseStatement(body={self.body})"
+
 class AssignmentStatement:
     def __init__(self, identifier, expression):
         self.identifier = identifier
