@@ -16,6 +16,8 @@ from parser import (
     ElseStatement,
     ArithmeticOperation,
     ComparisonOperation,
+    Function,
+    MainFunction,
     Parser)
 
 class Variables:
@@ -32,7 +34,7 @@ class Variables:
         else:
             raise NameError(f"Variable '{name}' not defined")
 
-# TODO: Require main() method
+# TODO: Add stack logic for nested blocks
 # TODO: Raise errors
 class Interpreter:
     def __init__(self):
@@ -177,8 +179,14 @@ def run_file():
     for node in ast:
         print(node)
     
+    main_function = None
+    for node in ast:
+        if isinstance(node, MainFunction):
+            main_function = node
+            break
+
     interpreter = Interpreter()
-    for statement in ast:
+    for statement in main_function.body:
         interpreter.evaluate(statement)
 
 run_file()
