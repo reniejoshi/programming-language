@@ -1,7 +1,6 @@
 // This is a comment
 
-output("Enter value for x: ")
-x = input()
+x = 1
 y = 1.5
 z = x * y
 message = "Hello, world!" // This is another comment
@@ -17,3 +16,7 @@ if y > x {
     output("y is greater than x")
     output("This is the second statement within the if statement body.")
 }
+
+output("Enter your name:")
+name = input()
+output("Hello, " + name + "!")

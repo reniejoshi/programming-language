@@ -154,7 +154,10 @@ class Parser:
         name = self.parse_identifier(self.current_token()[1])
         self.consume("IDENTIFIER")
         self.consume("ASSIGNMENT")
-        expression = self.parse_expression()
+        if self.current_token()[0] == "INPUT":
+            expression = self.parse_input_statement()
+        else:
+            expression = self.parse_expression()
         return AssignmentStatement(name, expression)
     
     def parse_term(self):

@@ -1,6 +1,6 @@
 import sys
 from tokenizer import Tokenizer
-from parser import Term, Integer, Float, String, PrintStatement, Identifier, AssignmentStatement, IfStatement, ArithmeticOperation, ComparisonOperation, Parser
+from parser import Term, Integer, Float, String, PrintStatement, InputStatement, Identifier, AssignmentStatement, IfStatement, ArithmeticOperation, ComparisonOperation, Parser
 
 class Variables:
     def __init__(self):
@@ -18,7 +18,6 @@ class Variables:
 
 # TODO: Require main() method
 # TODO: Raise errors
-# TODO: Handle input
 class Interpreter:
     def __init__(self):
         self.variables = Variables()
@@ -42,15 +41,23 @@ class Interpreter:
         elif isinstance(node, PrintStatement):
             return print(self.evaluate(node.expression))
         
+        elif isinstance(node, InputStatement):
+            return self.handle_input_statement()
+        
         elif isinstance(node, IfStatement):
             return self.handle_if_statement(node)
     
     def handle_assignment_statement(self, node):
+        name = node.identifier.value
+
         if isinstance(node.expression, Term):
-            self.variables.set_variable(node.identifier.value, node.expression.value)
+            value = node.expression.value
         elif isinstance(node.expression, ArithmeticOperation):
             value = self.handle_arithmetic_operation(node.expression)
-            self.variables.set_variable(node.identifier.value, value)
+        elif isinstance(node.expression, InputStatement):
+            value = self.handle_input_statement()
+        
+        self.variables.set_variable(name, value)
     
     def handle_if_statement(self, node):
         condition = self.evaluate(node.condition)
@@ -65,6 +72,9 @@ class Interpreter:
         # Else return
         else:
             return
+
+    def handle_input_statement(self):
+        return input()
 
     def handle_arithmetic_operation(self, node):
         first_term = self.evaluate(node.first_term)
