@@ -51,11 +51,11 @@ class Tokenizer:
                     self.consume()
                 continue
 
-            # If current char is the start of an identifier in camel case or keyword, append the identifer or keyword to tokens
+            # If current char is the start of an identifier or keyword, append the identifer or keyword to tokens
             elif self.current_char().isalpha():
                 start_index = self.index
                 self.consume()
-                while self.current_char() != "EOF" and self.current_char().isalpha():
+                while self.current_char() != "EOF" and (self.current_char().isalpha() or self.current_char() == "_"):
                     self.consume()
                 if self.code_string[start_index:self.index] in keywords:
                     keyword = self.code_string[start_index:self.index]
