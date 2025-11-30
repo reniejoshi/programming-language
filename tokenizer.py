@@ -1,3 +1,5 @@
+from helpers import is_int, is_float
+
 # This class translates code into tokens for the parser
 class Tokenizer:
     # Method to initialize object of class
@@ -71,9 +73,9 @@ class Tokenizer:
                 while self.current_char() != "EOF" and (self.current_char().isnumeric() or self.current_char() == "."):
                     self.consume()
                 number = self.code_string[start_index:self.index]
-                if self.is_int(number):
+                if is_int(number):
                     self.tokens.append(("INTEGER", int(number)))
-                elif self.is_float(number):
+                elif is_float(number):
                     self.tokens.append(("FLOAT", float(number)))
                 continue
 
@@ -145,17 +147,3 @@ class Tokenizer:
                 raise SyntaxError(f"Unexpected character '{self.current_char()} at index {self.index}")
             
         return self.tokens
-    
-    def is_int(self, number):
-        try:
-            int(number)
-            return True
-        except ValueError:
-            return False
-
-    def is_float(self, number):
-        try:
-            float(number)
-            return True
-        except ValueError:
-            return False
