@@ -129,9 +129,8 @@ class Tokenizer:
                 self.consume()
                 continue
 
-            # Increment index
             else:
-                self.consume()
+                raise SyntaxError(f"Unexpected character '{self.current_char()} at index {self.index}")
             
         return self.tokens
     
