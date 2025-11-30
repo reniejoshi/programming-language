@@ -53,6 +53,14 @@ class InputStatement:
     def __repr__(self):
         return f"InputStatement()"
 
+class AssignmentStatement:
+    def __init__(self, identifier, expression):
+        self.identifier = identifier
+        self.expression = expression
+    
+    def __repr__(self):
+        return f"AssignmentStatement(identifier={self.identifier}, expression={self.expression})"
+
 class ConditionalStatement:
     def __init__(self, if_statement, elif_statements, else_statement):
         self.if_statement = if_statement
@@ -84,14 +92,6 @@ class ElseStatement:
     
     def __repr__(self):
         return f"ElseStatement(body={self.body})"
-
-class AssignmentStatement:
-    def __init__(self, identifier, expression):
-        self.identifier = identifier
-        self.expression = expression
-    
-    def __repr__(self):
-        return f"AssignmentStatement(identifier={self.identifier}, expression={self.expression})"
 
 # This class translates tokens into Abstract Syntax Tree node types for the interpreter
 class Parser:
