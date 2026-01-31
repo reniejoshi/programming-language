@@ -39,6 +39,7 @@ class Variables:
 class Interpreter:
     def __init__(self):
         self.variables = Variables()
+        self.code_file = open("code_file.py", "w")
 
     def evaluate(self, node):
         if isinstance(node, AssignmentStatement):
@@ -48,7 +49,10 @@ class Interpreter:
             return self.variables.get_variable(node.value)
 
         elif isinstance(node, Term):
-            return node.value
+            if isinstance(node, String):
+                return '"' + node.value + '"'
+            else:
+                return node.value
         
         elif isinstance(node, ArithmeticOperation):
             return self.handle_arithmetic_operation(node)
@@ -57,6 +61,7 @@ class Interpreter:
             return self.handle_comparison_operation(node)
 
         elif isinstance(node, PrintStatement):
+            self.code_file.write("print(" + self.evaluate(node.expression) + ")")
             return print(self.evaluate(node.expression))
         
         elif isinstance(node, InputStatement):
