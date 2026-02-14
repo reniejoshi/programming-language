@@ -1,5 +1,12 @@
 # Abstract Syntax Tree node types
 
+class Newline:
+    def __init__(self, value):
+        self.value = value
+    
+    def __repr__(self):
+        return f"NewLine(value={self.value})"
+
 # Parent class for terms to inherit from
 class Term:
     def __init__(self, value):
@@ -174,6 +181,8 @@ class Parser:
                     else:
                         self.is_main_function_defined = True
                         return self.parse_main_function()
+            case "NEWLINE":
+                return self.parse_newline(self.current_token()[1])
             case _:
                 self.index += 1
                 return
@@ -193,6 +202,11 @@ class Parser:
             body.append(self.parse_statement())
         self.consume("CLOSE_BRACE")
         return body
+
+    def parse_newline(self, newline):
+        print(repr(newline))
+        self.consume("NEWLINE")
+        return Newline(newline)
 
     def parse_integer(self, integer):
         return Integer(integer)

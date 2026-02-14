@@ -2,6 +2,7 @@ import sys
 from helpers import is_int, is_float
 from tokenizer import Tokenizer
 from parser import (
+    Newline,
     Term,
     Integer,
     Float,
@@ -42,7 +43,11 @@ class Interpreter:
         self.code_file = open("code_file.py", "w")
 
     def evaluate(self, node):
-        if isinstance(node, AssignmentStatement):
+        if isinstance(node, Newline):
+            self.code_file.write(node.value)
+            return print(node.value)
+
+        elif isinstance(node, AssignmentStatement):
             return self.handle_assignment_statement(node)
 
         elif isinstance(node, Identifier):
@@ -162,7 +167,8 @@ def run_file():
     filename = sys.argv[1]
     file = open(filename, "r")
     code_string = file.read()
-    tokenizer = Tokenizer(code_string)
+    print(repr(code_string).strip("\'"))
+    tokenizer = Tokenizer(repr(code_string).strip("\'"))
     tokens = tokenizer.tokenize()
 
     print("tokens:")

@@ -1,5 +1,4 @@
 function run() {
-    output(4^2)
-    output(4 % 2)
+    output("Hello, world!")
     output(1 + 1 + 1)
 }

@@ -140,9 +140,9 @@ class Tokenizer:
                 continue
 
             # If current char is newline, append new line to tokens
-            elif self.current_char() == "\n":
-                self.tokens.append(("NEWLINE", self.current_char()))
-                self.consume()
+            elif self.current_char() == "\\" and self.next_char() == "n":
+                self.tokens.append(("NEWLINE", "\n"))
+                self.consume(2)
                 continue
 
             else:
