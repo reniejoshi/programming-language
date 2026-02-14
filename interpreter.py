@@ -21,25 +21,9 @@ from parser import (
     MainFunction,
     Parser)
 
-class Variables:
-    def __init__(self):
-        # Dictionary to store variables
-        self.variables = {}
-    
-    def set_variable(self, name, value):
-        self.variables[name] = value
-    
-    def get_variable(self, name):
-        if name in self.variables:
-            return self.variables[name]
-        else:
-            raise NameError(f"Variable '{name}' not defined")
-
-# TODO: Add stack logic for nested blocks
 # TODO: Raise errors
 class Interpreter:
     def __init__(self):
-        self.variables = Variables()
         self.code_file = open("code_file.py", "w")
 
     def evaluate(self, node):
@@ -81,8 +65,6 @@ class Interpreter:
             value = self.handle_arithmetic_operation(node.expression)
         elif isinstance(node.expression, InputStatement):
             value = self.handle_input_statement()
-        
-        self.variables.set_variable(name, value)
 
         self.code_file.write(f"{name} = {value}")
     
