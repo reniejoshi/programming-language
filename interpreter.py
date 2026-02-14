@@ -63,6 +63,8 @@ class Interpreter:
             value = node.expression.value
         elif isinstance(node.expression, ArithmeticOperation):
             value = self.handle_arithmetic_operation(node.expression)
+        elif isinstance(node.expression, ComparisonOperation):
+            value = self.handle_comparison_operation(node.expression)
         elif isinstance(node.expression, InputStatement):
             value = self.handle_input_statement()
 
@@ -122,19 +124,8 @@ class Interpreter:
     def handle_comparison_operation(self, node):
         first_term = self.evaluate(node.first_term)
         second_term = self.evaluate(node.second_term)
-        match node.operator:
-            case "==":
-                return first_term == second_term
-            case "!=":
-                return first_term != second_term
-            case ">":
-                return first_term > second_term
-            case "<":
-                return first_term < second_term
-            case ">=":
-                return first_term >= second_term
-            case "<=":
-                return first_term <= second_term
+
+        return f"{first_term} {node.operator} {second_term}"
 
 def run_file():
     filename = sys.argv[1]

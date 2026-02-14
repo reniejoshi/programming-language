@@ -1,5 +1,4 @@
 function run() {
-    output("Please enter your name")
-    name = input()
-    output("Nice to meet you, " + name + "!")
+    x = 1 < 2
+    output(x)
 }

@@ -1,4 +1,3 @@
 
-print("Please enter your name")
-name = input()
-print("Nice to meet you, " + name + "!")
+x = 1 < 2
+print(x)
