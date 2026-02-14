@@ -90,8 +90,11 @@ class Interpreter:
                     self.evaluate(statement)
         
         if else_statement != None:
-            else_body_statement = self.handle_else_statement(else_statement)
-            return else_body_statement
+            self.handle_else_statement()
+
+        for statement in else_statement.body:
+            self.code_file.write("\t")
+            self.evaluate(statement)
         
         return []
 
@@ -104,11 +107,8 @@ class Interpreter:
         self.code_file.write(f"elif {condition}:")
         
 
-    def handle_else_statement(self, node):
-        body_statements = []
-        for statement in node.body:
-            body_statements.append(self.evaluate(statement))
-        return body_statements
+    def handle_else_statement(self):
+        self.code_file.write("else:")
 
     def handle_input_statement(self):
         return "input()"
