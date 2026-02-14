@@ -1,3 +1,3 @@
 
-print("Hello, world!")
-print(1 + 1 + 1)
+x = 1 + 1
+print(x)

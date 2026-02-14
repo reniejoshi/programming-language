@@ -50,9 +50,6 @@ class Interpreter:
         elif isinstance(node, AssignmentStatement):
             return self.handle_assignment_statement(node)
 
-        elif isinstance(node, Identifier):
-            return self.variables.get_variable(node.value)
-
         elif isinstance(node, Term):
             if isinstance(node, String):
                 return '"' + node.value + '"'
@@ -86,6 +83,8 @@ class Interpreter:
             value = self.handle_input_statement()
         
         self.variables.set_variable(name, value)
+
+        self.code_file.write(f"{name} = {value}")
     
     def handle_conditional_statement(self, node):
         if_statement = node.if_statement
