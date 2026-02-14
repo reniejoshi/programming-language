@@ -1,1 +1,1 @@
-print("Hello, world!")
+print(4 ** 2)print(4 % 2)print(1 + 1 + 1)

@@ -61,7 +61,7 @@ class Interpreter:
             return self.handle_comparison_operation(node)
 
         elif isinstance(node, PrintStatement):
-            self.code_file.write("print(" + self.evaluate(node.expression) + ")")
+            self.code_file.write("print(" + str(self.evaluate(node.expression)) + ")")
             return print(self.evaluate(node.expression))
         
         elif isinstance(node, InputStatement):
@@ -135,19 +135,11 @@ class Interpreter:
     def handle_arithmetic_operation(self, node):
         first_term = self.evaluate(node.first_term)
         second_term = self.evaluate(node.second_term)
-        match node.operator:
-            case "+":
-                return first_term + second_term
-            case "-":
-                return first_term - second_term
-            case "*":
-                return first_term * second_term
-            case "/":
-                return first_term / second_term
-            case "%":
-                return first_term % second_term
-            case "^":
-                return first_term ** second_term
+
+        if node.operator == "+" or node.operator == "-" or node.operator == "*" or node.operator == "/" or node.operator == "%":
+            return f"{first_term} {node.operator} {second_term}"
+        elif node.operator == "^":
+            return f"{first_term} ** {second_term}"
 
     def handle_comparison_operation(self, node):
         first_term = self.evaluate(node.first_term)
