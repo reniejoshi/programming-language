@@ -126,15 +126,7 @@ class Interpreter:
         return body_statements
 
     def handle_input_statement(self):
-        user_input = input()
-        
-        if user_input.isnumeric():
-            if is_int(user_input):
-                user_input = int(user_input)
-            elif is_float(user_input):
-                user_input = float(user_input)
-
-        return user_input
+        return "input()"
 
     def handle_arithmetic_operation(self, node):
         first_term = self.evaluate(node.first_term)

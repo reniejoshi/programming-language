@@ -1,3 +1,4 @@
 
-x = 1 + 1
-print(x)
+print("Please enter your name")
+name = input()
+print("Nice to meet you, " + name + "!")
