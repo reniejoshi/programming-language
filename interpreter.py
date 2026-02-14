@@ -75,10 +75,12 @@ class Interpreter:
         elif_statements = node.elif_statements
         else_statement = node.else_statement
 
-        if_body_statements = self.handle_if_statement(if_statement)
-        if if_body_statements != []:
-            return if_body_statements
+        self.handle_if_statement(if_statement)
         
+        for statement in if_statement.body:
+            self.code_file.write("\t")
+            self.evaluate(statement)
+
         if elif_statements != None:
             elif_body_statements = []
             for elif_statement in elif_statements:
@@ -94,14 +96,8 @@ class Interpreter:
 
     def handle_if_statement(self, node):
         condition = self.evaluate(node.condition)
-        body_statements = []
 
-        # If condition is True, evaluate body
-        if condition:
-            for statement in node.body:
-                body_statements.append(self.evaluate(statement))
-        
-        return body_statements
+        self.code_file.write(f"if {condition}:")
 
     def handle_else_statement(self, node):
         body_statements = []

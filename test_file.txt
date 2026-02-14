@@ -1,4 +1,6 @@
 function run() {
-    x = 1 < 2
-    output(x)
+    if 1 < 2 {
+        output("condition is true")
+        output("condition is still true")
+    }
 }
