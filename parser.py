@@ -160,12 +160,8 @@ class Parser:
     
     def parse_statement(self):
         match self.current_token()[0]:
-            case "INTEGER":
-                return self.parse_integer(self.current_token()[1])
-            case "FLOAT":
-                return self.parse_float(self.current_token()[1])
-            case "STRING":
-                return self.parse_string(self.current_token()[1])
+            case "INTEGER" | "FLOAT" | "STRING":
+                return self.parse_term()
             case "IDENTIFIER" if self.next_token()[0] == "ASSIGNMENT":
                 return self.parse_assignment_statement()
             case "PRINT":
@@ -209,6 +205,7 @@ class Parser:
         return Newline(newline)
 
     def parse_integer(self, integer):
+        print(repr(integer))
         return Integer(integer)
     
     def parse_float(self, float):
