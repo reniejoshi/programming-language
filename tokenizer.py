@@ -94,7 +94,7 @@ class Tokenizer:
                 continue
 
             # If current char is variable assignment, append the assignment symbol to tokens
-            elif self.current_char() == "=" and self.next_char() != "=":
+            elif self.current_char() == ":":
                 self.tokens.append(("ASSIGNMENT", self.current_char()))
                 self.consume()
                 continue
