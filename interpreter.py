@@ -95,8 +95,6 @@ class Interpreter:
         for statement in else_statement.body:
             self.code_file.write("\t")
             self.evaluate(statement)
-        
-        return []
 
     def handle_if_statement(self, node):
         condition = self.evaluate(node.condition)
