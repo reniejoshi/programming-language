@@ -1,4 +1,6 @@
 
-first_name = "Renie"
-last_name = "Joshi"
-print(first_name + " " + last_name)
+i = 0
+while i < 10:	
+	print(i)	
+	i = i + 1	
+

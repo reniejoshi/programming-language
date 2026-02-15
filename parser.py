@@ -188,6 +188,8 @@ class Parser:
                 return self.parse_input_statement()
             case "IF":
                 return self.parse_conditional_statement()
+            case "WHILE_LOOP":
+                return self.parse_while_loop()
             case "FUNCTION":
                 if self.next_token()[0] == "MAIN":
                     if self.is_main_function_defined:
@@ -285,6 +287,12 @@ class Parser:
         else:
             expression = self.parse_expression()
         return AssignmentStatement(name, expression)
+    
+    def parse_while_loop(self):
+        self.consume("WHILE_LOOP")
+        condition = self.parse_expression()
+        body = self.parse_body()
+        return WhileLoop(condition, body)
     
     def parse_term(self):
         token_type = self.current_token()[0]

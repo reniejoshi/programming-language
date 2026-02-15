@@ -34,6 +34,8 @@ class Tokenizer:
             "if": "IF",
             "elsif": "ELIF",
             "else": "ELSE",
+            "for": "FOR_LOOP",
+            "while": "WHILE_LOOP",
             "function": "FUNCTION",
             "run": "MAIN"
         }

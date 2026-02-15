@@ -1,5 +1,7 @@
 function run() {
-    first_name = "Renie"
-    last_name = "Joshi"
-    output(first_name + " " + last_name)
+    i = 0
+    while i < 10 {
+        output(i)
+        i = i + 1
+    }
 }

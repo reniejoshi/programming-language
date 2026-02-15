@@ -17,6 +17,7 @@ from parser import (
     ElseStatement,
     ArithmeticOperation,
     ComparisonOperation,
+    WhileLoop,
     Function,
     MainFunction,
     Parser)
@@ -55,6 +56,9 @@ class Interpreter:
         
         elif isinstance(node, ConditionalStatement):
             return self.handle_conditional_statement(node)
+        
+        elif isinstance(node, WhileLoop):
+            return self.handle_while_loop(node)
     
     def handle_assignment_statement(self, node):
         name = node.identifier.value
@@ -102,11 +106,18 @@ class Interpreter:
 
     def handle_elif_statement(self, node):
         condition = self.evaluate(node.condition)
-        self.code_file.write(f"elif {condition}:")
-        
+        self.code_file.write(f"elif {condition}:")        
 
     def handle_else_statement(self):
         self.code_file.write("else:")
+
+    def handle_while_loop(self, node):
+        condition = self.evaluate(node.condition)
+        self.code_file.write(f"while {condition}:")
+
+        for statement in node.body:
+            self.code_file.write("\t")
+            self.evaluate(statement)
 
     def handle_input_statement(self):
         return "input()"
