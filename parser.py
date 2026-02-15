@@ -116,6 +116,24 @@ class MainFunction(Function):
     def __repr__(self):
         return f"MainFunction(body={self.body})"
 
+class WhileLoop:
+    def __init__(self, condition, body):
+        self.condition = condition
+        self.body = body
+    
+    def __repr__(self):
+        return f"WhileLoop(condition={self.condition}, body={self.body})"
+
+class ForLoop:
+    def __init__(self, initialization, condition, increment, body):
+        self.initialization = initialization
+        self.condition = condition
+        self.increment = increment
+        self.body = body
+    
+    def __repr__(self):
+        return f"ForLoop(initialization={self.initialization}, condition={self.condition}, increment={self.increment}, body={self.body})"
+
 # This class translates tokens into Abstract Syntax Tree node types for the interpreter
 class Parser:
     def __init__(self, tokens):
