@@ -60,7 +60,7 @@ class Interpreter:
         name = node.identifier.value
 
         if isinstance(node.expression, Term):
-            value = node.expression.value
+            value = self.evaluate(node.expression)
         elif isinstance(node.expression, ArithmeticOperation):
             value = self.handle_arithmetic_operation(node.expression)
         elif isinstance(node.expression, ComparisonOperation):

@@ -1,11 +1,5 @@
 function run() {
-    if 2 < 0 {
-        output("condition is true")
-        output("condition is still true")
-    } elsif 1 < 0 {
-        output("1 < 0")
-        output("the above condition is true")
-    } else {
-        output("the conditions are not true")
-    }
+    first_name = "Renie"
+    last_name = "Joshi"
+    output(first_name + " " + last_name)
 }
