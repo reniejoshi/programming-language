@@ -25,7 +25,7 @@ from parser import (
 # TODO: Raise errors
 class Interpreter:
     def __init__(self):
-        self.code_file = open("code_file.py", "w")
+        self.code_file = open(filename.split(".")[0] + ".py", "w")
 
     def evaluate(self, node):
         if isinstance(node, Newline):
@@ -138,6 +138,8 @@ class Interpreter:
         return f"{first_term} {node.operator} {second_term}"
 
 def run_file():
+    global filename
+
     filename = sys.argv[1]
     file = open(filename, "r")
     code_string = file.read()
